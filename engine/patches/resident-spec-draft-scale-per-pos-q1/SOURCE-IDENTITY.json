@@ -1,0 +1,53 @@
+{
+  "container": {
+    "name": "qwen38-resident-a-clean-q1",
+    "id": "ae352c18becc3660d3a1b76c4e0c1ea1a55288a414c4fefadf863adfe7aca497",
+    "image_tag": "qwen38-flash-dgx:a5b-resident-20261030-q9",
+    "image_digest": "sha256:f815c084dceb28bc246822c74e4881e60ae956439fe81ad6887bb549b4638783",
+    "running_at_capture": true
+  },
+  "capture": "Read-only SSH docker exec against the installed files; no remote source edits",
+  "patch": "0001-resident-draft-scale-per-pos.patch",
+  "files": [
+    {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/models/qwen3_8_flash_next/nvidia/mtp.py",
+      "sha256": "36c58719807347c30dbc4e740c0009902792ad115426e76a2a7bb1b1f9475b8b",
+      "patched": true,
+      "snapshot_file": "source-original-mtp.py"
+    },
+    {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu/spec_decode/speculator.py",
+      "sha256": "1b3bb97df3191cf8e657bb12187feb0342a979301a35cd25f6bdc1d0083895c0",
+      "patched": true,
+      "snapshot_file": "source-original-speculator.py"
+    },
+    {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu/spec_decode/autoregressive/speculator.py",
+      "sha256": "3bcdc282feba9d9da910f78ffdbbd9148a8d7fc6b0353458c047d4ba89d489aa",
+      "patched": true,
+      "snapshot_file": "source-original-autoregressive-speculator.py"
+    },
+    {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu/spec_decode/dflash/speculator.py",
+      "sha256": "9b41c44219af5719e86a11b5489f143f486c43534a6b3d03d7a2f2f68b11ffed",
+      "patched": true,
+      "snapshot_file": "source-original-dflash-speculator.py",
+      "position_argument": null,
+      "reason": "one flattened call contains multiple proposal positions"
+    },
+    {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu/spec_decode/multi_module_mtp/speculator.py",
+      "sha256": "f2f99e4c6a27646737fd74733e54a328bfaff27ac34a8e3ba45e89bd5482ea05",
+      "patched": true,
+      "snapshot_file": "source-original-multi-module-mtp-speculator.py",
+      "position_argument": "loop step"
+    },
+    {
+      "path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu/model_runner.py",
+      "sha256": "e36fea8fd26e9719b8b4cbd6e0db70bdeb448a61515a0b2a1e60ba3eecf63fee",
+      "patched": false,
+      "snapshot_file": "source-original-model-runner.py",
+      "source_fact": "sample_tokens selects active temperatures from the CPU NumPy state and sets speculator._resident_positive_temperature_batch only when the nonempty active batch is entirely positive before propose; propose finally resets it"
+    }
+  ]
+}

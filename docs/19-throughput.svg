@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="1000" height="500" font-family="sans-serif" font-size="14">
+  <title>Decode throughput: this recipe, this repo's GB10-alone run, and the published reference</title>
+
+  <rect x="0" y="0" width="1000" height="500" fill="#111111"/>
+
+  <text x="20" y="30" font-size="14" fill="#e6e6e6">Decode throughput, tokens per second</text>
+  <text x="20" y="50" font-size="13" fill="#a0a0a0">Blue and green are this repo. Orange is this repo's GB10-alone run. Grey is the author's published range.</text>
+
+  <line x1="300" y1="70" x2="300" y2="400" stroke="#555555" stroke-width="1"/>
+  <line x1="300" y1="400" x2="960" y2="400" stroke="#555555" stroke-width="1"/>
+  <line x1="465" y1="70" x2="465" y2="400" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="630" y1="70" x2="630" y2="400" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="795" y1="70" x2="795" y2="400" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="300" y="420" font-size="12" text-anchor="middle" fill="#a0a0a0">0</text>
+  <text x="465" y="420" font-size="12" text-anchor="middle" fill="#a0a0a0">50</text>
+  <text x="630" y="420" font-size="12" text-anchor="middle" fill="#a0a0a0">100</text>
+  <text x="795" y="420" font-size="12" text-anchor="middle" fill="#a0a0a0">150</text>
+  <text x="960" y="420" font-size="12" text-anchor="middle" fill="#a0a0a0">200</text>
+
+  <text x="290" y="96" font-size="13" text-anchor="end" fill="#e6e6e6">409,600 code, GB10 + 3090</text>
+  <rect x="300" y="84" width="613" height="24" rx="3" fill="#6ea8fe"/>
+  <text x="905" y="102" font-size="13" text-anchor="end" fill="#111111">185.89</text>
+
+  <text x="290" y="132" font-size="13" text-anchor="end" fill="#e6e6e6">340,000 code, C=2 aggregate</text>
+  <rect x="300" y="120" width="539" height="24" rx="3" fill="#6ea8fe" opacity="0.7"/>
+  <text x="831" y="138" font-size="13" text-anchor="end" fill="#111111">163.46</text>
+
+  <text x="290" y="168" font-size="13" text-anchor="end" fill="#e6e6e6">409,600 prose, GB10 + 3090</text>
+  <rect x="300" y="156" width="222" height="24" rx="3" fill="#6bd6a0"/>
+  <text x="514" y="174" font-size="13" text-anchor="end" fill="#111111">67.28</text>
+
+  <text x="290" y="204" font-size="13" text-anchor="end" fill="#e6e6e6">340,000 prose, C=2 aggregate</text>
+  <rect x="300" y="192" width="258" height="24" rx="3" fill="#6bd6a0" opacity="0.7"/>
+  <text x="550" y="210" font-size="13" text-anchor="end" fill="#111111">78.35</text>
+
+  <text x="290" y="240" font-size="13" text-anchor="end" fill="#e6e6e6">GB10 alone, code (this repo)</text>
+  <rect x="300" y="228" width="334" height="24" rx="3" fill="#e0b36e"/>
+  <text x="626" y="246" font-size="13" text-anchor="end" fill="#111111">101.44</text>
+
+  <text x="290" y="276" font-size="13" text-anchor="end" fill="#e6e6e6">GB10 alone, prose (this repo)</text>
+  <rect x="300" y="264" width="128" height="24" rx="3" fill="#e0b36e" opacity="0.7"/>
+  <text x="420" y="282" font-size="13" text-anchor="end" fill="#111111">38.80</text>
+
+  <text x="290" y="312" font-size="13" text-anchor="end" fill="#e6e6e6">GB10 alone, 5 experts (author)</text>
+  <rect x="300" y="300" width="247" height="24" rx="3" fill="#8a8a8a"/>
+  <text x="539" y="318" font-size="13" text-anchor="end" fill="#111111">~70-75</text>
+
+  <text x="290" y="348" font-size="13" text-anchor="end" fill="#e6e6e6">GB10 alone, 10 experts (author)</text>
+  <rect x="300" y="336" width="188" height="24" rx="3" fill="#8a8a8a" opacity="0.7"/>
+  <text x="480" y="354" font-size="13" text-anchor="end" fill="#111111">~57</text>
+
+  <text x="20" y="452" font-size="13" fill="#a0a0a0">This recipe: 512 routed experts retained, 5 selected per token, 4.8B active.</text>
+  <text x="20" y="470" font-size="12" fill="#a0a0a0">The 409600 and 340000 labels are the configured maximum windows; decode used the runner fixed short prompt (about 67 input tokens, 400 forced output tokens).</text>
+  <text x="20" y="488" font-size="12" fill="#a0a0a0">The GB10-alone row is the registered HTTP/SSE run (67/39 input tokens) on a vLLM dev build. The author's range uses a different harness, so grey bars are relative only.</text>
+</svg>

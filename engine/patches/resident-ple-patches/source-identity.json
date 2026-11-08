@@ -1,0 +1,13 @@
+{
+  "schema": "installed-ple-source-identity-v1",
+  "base_image_id": "sha256:f815c084dceb28bc246822c74e4881e60ae956439fe81ad6887bb549b4638783",
+  "container": "qwen38-resident-a-clean-q1",
+  "vllm_version": "0.1.dev20073+g8e685d198",
+  "installed_path": "/usr/local/lib/python3.12/dist-packages/vllm_ple_mmap.py",
+  "source_sha256": "6ffc537effd05ec6515bd8578c28d292cb376d7eb4a87697466206dfd57748b5",
+  "source_bytes": 31129,
+  "snapshot_archive": "installed-qsa-ple-source-evidence.zip:vllm_ple_mmap.py",
+  "patch_file": "0001-guarded-diagnostic-prewarm.patch",
+  "patch_target_basename": "vllm_ple_mmap.py",
+  "runtime_helper": "resident_ple_control.prewarm_ple_table"
+}

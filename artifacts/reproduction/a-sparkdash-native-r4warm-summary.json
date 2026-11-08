@@ -1,0 +1,41 @@
+[
+  {
+    "run_id": "a-sparkdash-native-r4warm-k6-open-prose-01",
+    "kind": "decode",
+    "case": "prose",
+    "config": "k6-open",
+    "c": 1,
+    "median": 95.78,
+    "agg": 95.78,
+    "ok": 1,
+    "failed": 0,
+    "ttft": 85.3,
+    "tokens": 400
+  },
+  {
+    "run_id": "a-sparkdash-native-r4warm-k6-open-prose-02",
+    "kind": "decode",
+    "case": "prose",
+    "config": "k6-open",
+    "c": 1,
+    "median": 87.35,
+    "agg": 87.35,
+    "ok": 1,
+    "failed": 0,
+    "ttft": 87.79,
+    "tokens": 400
+  },
+  {
+    "run_id": "a-sparkdash-native-r4warm-k6-open-prose-03",
+    "kind": "decode",
+    "case": "prose",
+    "config": "k6-open",
+    "c": 1,
+    "median": 82.5,
+    "agg": 82.5,
+    "ok": 1,
+    "failed": 0,
+    "ttft": 87.57,
+    "tokens": 400
+  }
+]

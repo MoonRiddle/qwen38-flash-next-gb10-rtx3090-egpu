@@ -1,0 +1,11 @@
+ARG BASE_IMAGE=qwen38-flash-dgx:a5b-autoround-base-f815c084
+FROM ${BASE_IMAGE}
+COPY resident-spec-draft-scale-per-pos-q1/SOURCE-IDENTITY.json /tmp/autoround-source-identity.json
+COPY verify_bottleneck_image.py /tmp/verify-bottleneck-image.py
+COPY resident-spec-draft-scale-per-pos-q1/0001-resident-draft-scale-per-pos.patch /tmp/autoround-draft-scale.patch
+COPY resident-ple-patches/0001-guarded-diagnostic-prewarm.patch /tmp/autoround-ple-prewarm.patch
+COPY resident-round-profile-q1/0001-resident-round-profile.patch /tmp/autoround-round-profile.patch
+COPY resident_ple_control.py /usr/local/lib/python3.12/dist-packages/resident_ple_control.py
+WORKDIR /usr/local/lib/python3.12/dist-packages
+RUN python3 /tmp/verify-bottleneck-image.py && patch --batch --fuzz=0 -p1 < /tmp/autoround-draft-scale.patch && patch --batch --fuzz=0 -p0 < /tmp/autoround-ple-prewarm.patch && patch --batch --fuzz=0 -p1 < /tmp/autoround-round-profile.patch && python3 -m py_compile vllm/models/qwen3_8_flash_next/nvidia/mtp.py vllm/v1/worker/gpu/spec_decode/speculator.py vllm/v1/worker/gpu/spec_decode/autoregressive/speculator.py vllm/v1/worker/gpu/spec_decode/dflash/speculator.py vllm/v1/worker/gpu/spec_decode/multi_module_mtp/speculator.py vllm/v1/worker/gpu/model_runner.py vllm_ple_mmap.py resident_ple_control.py
+WORKDIR /work

@@ -1,0 +1,14 @@
+{
+  "name": "sparkdash-exact",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Byte-exact pinned MiaAI-Lab/sparkDash collectors (commit 7c2b9638b025cd39fb43f95c225de62980f130ee) plus a runner that calls their native public job API without modifying them.",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "dependencies": {
+    "undici": "8.11.2"
+  }
+}

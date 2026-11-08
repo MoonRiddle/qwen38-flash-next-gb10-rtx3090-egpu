@@ -1,0 +1,2557 @@
+{
+  "schema": "sparkdash-exact-invocation-v1",
+  "protocol_id": "mia-sparkdash-native-7c2b963-c1-v1",
+  "run_id": "a-sep-e-k6-open-code-01",
+  "created_at": "2026-11-06T15:10:43.461Z",
+  "completed_at": "2026-11-06T15:10:47.022Z",
+  "benchmark_kind": "decode",
+  "workload": "code",
+  "configuration_id": "k6-open",
+  "configuration": {
+    "draft_scale": 1,
+    "draft_scale_per_pos": null,
+    "prose_max_draft_tokens": 6,
+    "prose_confidence_threshold": null,
+    "prose_draft_top_k": null,
+    "prose_draft_head_mode": "int4",
+    "ple_madvise": "normal",
+    "ple_gather_fast_rows": 512,
+    "target_only": false,
+    "code_draft_tokens": 15,
+    "peer_async_transfers": true,
+    "peer_shared_overlap": false
+  },
+  "engine_instance_id": "5b67fa25-f324-4a81-b166-5a420a6488fd",
+  "engine": {
+    "host": "127.0.0.1",
+    "port": 18800,
+    "tls": false,
+    "model_id": "qwen38-mia-a5b",
+    "base_url": "http://127.0.0.1:18800"
+  },
+  "source": {
+    "repo": "https://github.com/MiaAI-Lab/sparkDash",
+    "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee",
+    "hashes": {
+      "server/collectors/DecodeBench.js": "1da7a50f7f2fc635331d80a579294fc1b014095250c1382c12fc6e3f4d56ffd3",
+      "server/collectors/PrefillBench.js": "6454fba7f7813aaad97019afac13c1894a052257464425e30e0929106bcf8164",
+      "server/collectors/LlmStreaming.js": "e3390785702c7e1bfef169f35d50d8c5c7b76b883f7deafe81fd09f6a96cfaa9",
+      "server/collectors/contextFill.js": "bc103ddfdacbf52ac848a010b106367bf6cea711144dc25a64b5727304fb2a17",
+      "server/util/atomicWrite.js": "29daea3fb199c184365710eac9e3086a5b87e09a9f7c33149e45338aa5ab1a41",
+      "src/shared/llmPrompts.js": "4938e3245d8474f27055bbc66493163e99f1b54885cd5a62a7c7b6507a208bee",
+      "src/shared/llmTarget.js": "74913ffd206454f31743d8bba76892f12d1204eae21055173bdde3796c793443",
+      "src/shared/prefillBench.js": "914d0cbf1f52597ed7080dbd8fdf47815b5b170193c517aabf52dccbac508ff4",
+      "src/shared/contextFit.js": "e62f92a55abfb8595f4da0fd894c3f824d9ba8765dffc1b8f3597b829e56d652",
+      "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "LICENSE-MIT": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685",
+      "NOTICE": "1bdd74e322165901d937f43a144a19c627a003c974d71b07d9460e98273dbf9e"
+    },
+    "verified": true,
+    "verified_at": "2026-11-06T15:10:43.467Z",
+    "source_lock_sha256": "b3b6962fda76c7130b90dfbe256b982b3e4e99069c6efa21156511590bcec86b",
+    "mismatches": []
+  },
+  "native_job": {
+    "benchId": "d754f64e-b28e-4d26-acb4-b02dd645f01c",
+    "sparkId": "jgx10-1",
+    "status": "completed",
+    "startedAt": 1793977843557,
+    "completedAt": 1793977847022,
+    "config": {
+      "port": 18800,
+      "modelId": "qwen38-mia-a5b",
+      "concurrencies": [
+        1
+      ],
+      "maxTokens": 400,
+      "promptType": "code",
+      "temperature": 0,
+      "thinking": false,
+      "host": "127.0.0.1",
+      "tls": false
+    },
+    "progress": {
+      "currentConcurrency": null,
+      "completedLevels": 1,
+      "totalLevels": 1,
+      "message": "Done",
+      "liveTps": null,
+      "prefill": null
+    },
+    "results": [
+      {
+        "concurrency": 1,
+        "streamsOk": 1,
+        "streamsFailed": 0,
+        "meanDecodeTps": 177.8,
+        "medianDecodeTps": 177.8,
+        "minDecodeTps": 177.8,
+        "maxDecodeTps": 177.8,
+        "meanTtftMs": 347.54,
+        "medianTtftMs": 347.54,
+        "aggregateDecodeTps": 177.8,
+        "meanPrefillTps": 192.78,
+        "medianPrefillTps": 192.78,
+        "aggregatePrefillTps": 192.78,
+        "totalPrefillTokens": 67,
+        "totalDecodeTokens": 399,
+        "totalCompletionTokens": 400,
+        "durationMs": 2592.07,
+        "error": null,
+        "streams": [
+          {
+            "index": 0,
+            "ttftContentMs": 347.54,
+            "reasoningChunks": 0,
+            "ttftMs": 347.54,
+            "decodeTps": 177.8,
+            "decodeTokens": 399,
+            "completionTokens": 400,
+            "prefillTps": 192.78,
+            "prefillTokens": 67,
+            "cachedTokens": 0,
+            "totalMs": 2591.73,
+            "error": null
+          }
+        ],
+        "model": "qwen38-mia-a5b"
+      }
+    ],
+    "error": null,
+    "durationMs": 3465,
+    "owner": null
+  },
+  "native_job_modified": false,
+  "options": {
+    "requested": {
+      "sparkId": "jgx10-1",
+      "lanIp": "127.0.0.1",
+      "port": 18800,
+      "modelId": "qwen38-mia-a5b",
+      "host": "127.0.0.1",
+      "tls": false,
+      "concurrencies": [
+        1
+      ],
+      "maxTokens": 400,
+      "promptType": "code",
+      "temperature": 0,
+      "thinking": false,
+      "debug": false
+    },
+    "effective_config": {
+      "port": 18800,
+      "modelId": "qwen38-mia-a5b",
+      "concurrencies": [
+        1
+      ],
+      "maxTokens": 400,
+      "promptType": "code",
+      "temperature": 0,
+      "thinking": false,
+      "host": "127.0.0.1",
+      "tls": false
+    },
+    "defaults": {
+      "allowedConcurrencies": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        10,
+        12,
+        16,
+        24,
+        32
+      ],
+      "defaultMaxTokens": 400,
+      "minMaxTokens": 64,
+      "maxMaxTokens": 2048,
+      "promptTypes": [
+        "structured",
+        "prose",
+        "code",
+        "json"
+      ],
+      "defaultPromptType": "structured",
+      "defaultTemperature": 0.7,
+      "minTemperature": 0,
+      "maxTemperature": 2,
+      "defaultThinking": true,
+      "minContextTokens": 256,
+      "maxContextTokens": 300000
+    },
+    "applied_defaults": {
+      "backend": null,
+      "contextTokens": 0,
+      "sampleHardware": null,
+      "resolveTarget": null,
+      "owner": null
+    },
+    "api_key_present": false
+  },
+  "runtime": {
+    "node": "v24.22.2",
+    "platform": "linux",
+    "arch": "arm64",
+    "exec_path": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/sparkdash-runtime/node-v24.22.2-linux-arm64/bin/node",
+    "undici_version": "8.11.2"
+  },
+  "client_host": {
+    "hostname": "JGX10-1",
+    "platform": "linux",
+    "arch": "arm64",
+    "measurement_location": "HTTP client executes on this host; engine location is parent-provided metadata"
+  },
+  "metadata": {
+    "campaign_id": "pdf9-recipe-publish-20261105",
+    "model_id": "azampatti/Qwen3.8-Flash-Next-125B-A5B-INT4-AutoRound",
+    "matrix_id": "sparkdash-native-context409k-r1",
+    "experiment_role": "primary-matrix",
+    "planned_decode_jobs_per_case": 3,
+    "profilers": {
+      "native": false,
+      "phase": false,
+      "peer": false
+    },
+    "ple_storage": "nvme",
+    "ple_host_dir": "/mnt/nvme20/ple-table-int4",
+    "engine_load_seconds": 297.247377,
+    "engine_ready_utc": "2026-11-06T15:06:28.148081+00:00",
+    "requested_concurrencies": [
+      1
+    ],
+    "requested_max_tokens": 400,
+    "requested_context_sizes": [
+      4096,
+      16384,
+      32768
+    ],
+    "validator": "local driver; the campaign validator only accepts C1 envelopes"
+  },
+  "fresh_snapshot": {
+    "engine_instance_id": "5b67fa25-f324-4a81-b166-5a420a6488fd",
+    "observed_utc": "2026-11-06T15:10:39.456623+00:00",
+    "engine_identity": {
+      "engine_instance_id": "5b67fa25-f324-4a81-b166-5a420a6488fd",
+      "api_server_pid": 7,
+      "worker_pids": [
+        83
+      ],
+      "worker_identity_rpc_result": [
+        {
+          "engine_instance_id": "5b67fa25-f324-4a81-b166-5a420a6488fd",
+          "pid": 83,
+          "worker_class": "Worker"
+        }
+      ],
+      "identity_source": "resident_engine_identity RPC plus resident state file API PID"
+    },
+    "control_after": [
+      {
+        "schema": "qwen38-resident-spec-control-v1",
+        "status": "ready",
+        "engine": {
+          "speculator_class": "MTPSpeculator",
+          "draft_sample_method": "probabilistic",
+          "rejection_sample_method": "standard",
+          "max_speculative_tokens": 15,
+          "code_draft_tokens": 15,
+          "draft_scale": 1,
+          "draft_scale_per_pos": null,
+          "prose_draft_head_mode": "int4",
+          "compact_draft_head_enabled": false,
+          "target_only": false,
+          "prose_max_draft_tokens": 6,
+          "prose_confidence_threshold": null,
+          "prose_draft_top_k": null,
+          "prose_residual_top_k": null,
+          "last_active_draft_tokens": 6,
+          "last_valid_draft_tokens": 6,
+          "last_confidence_checks": 0,
+          "phase_profiling_enabled": false
+        },
+        "execution": {
+          "cuda_graph_modes": [
+            "prefill:NONE",
+            "decode:NONE",
+            "engine:NONE"
+          ],
+          "full_graph_captures": [],
+          "live_python_control_safe": true,
+          "async_scheduling": false,
+          "dynamic_depth_patch_loaded": true,
+          "code_draft_depth_patch_loaded": false,
+          "last_valid_draft_depth_state_valid": true,
+          "max_buffers_and_kv_lookahead_are_fixed_at_engine_start": true,
+          "draft_sampling": {
+            "temperature": "target request temperature",
+            "proposal_top_k": null,
+            "proposal_top_k_applies_to": "all-positive-temperature batches only",
+            "proposal_top_k_automatically_inherits_target": false,
+            "proposal_top_p": "not applied",
+            "draft_scale_per_pos_applies_to": "all-positive-temperature batches only",
+            "draft_scale_per_pos_uses": "global draft_scale multiplied by relative[position]; omitted positions use global draft_scale",
+            "target_sampling_parameters_modified": false,
+            "sampling_and_rejection_use_same_filtered_q": true
+          },
+          "residual_sampling": {
+            "candidate_top_k": null,
+            "candidate_set": "Top-64 target candidates union the rejected draft token",
+            "target_top_k_over_64": "full-vocabulary residual fallback"
+          },
+          "proposal_depth_policy": {
+            "all_temperature_zero_requests": "fixed Kmax; no prose shortening",
+            "all_positive_temperature_requests": "configured prose_max_draft_tokens",
+            "mixed_temperature_batch": "fixed Kmax; no confidence early-stop",
+            "confidence_threshold_requires_all_positive_temperature_batch": true
+          }
+        },
+        "capabilities": {
+          "phase_profiling_enabled": {
+            "enabled": false,
+            "reason": "requires actual QWEN38_ROUND_PROFILE external hooks, an owner/helper round ring, probabilistic drafts, standard rejection, PIECEWISE/NONE graphs and synchronous scheduling",
+            "required_hooks": [
+              "execute_model_round_start",
+              "speculator_propose_host",
+              "target_logits",
+              "target_logits_host",
+              "target_model_forward",
+              "target_model_forward_host",
+              "target_rejection_sampler",
+              "target_rejection_sampler_host",
+              "target_sampler",
+              "target_sampler_host"
+            ],
+            "attached_hooks": [],
+            "missing_required_hooks": [
+              "execute_model_round_start",
+              "speculator_propose_host",
+              "target_logits",
+              "target_logits_host",
+              "target_model_forward",
+              "target_model_forward_host",
+              "target_rejection_sampler",
+              "target_rejection_sampler_host",
+              "target_sampler",
+              "target_sampler_host"
+            ],
+            "record_function_ranges": [],
+            "round_helper_device": null,
+            "cost": "samples attached phase CUDA events and host ranges one in 16 calls; configuration records and completion-checks all event handles with per-device stream synchronization; decode T_round classifies requests from CPU BatchReqState.is_prefilling_np and scheduled_spec_decode_tokens; owner/helper timings are current-stream marker intervals, not total work; no generation synchronization"
+          },
+          "prose_draft_top_k": {
+            "enabled": true,
+            "reason": null,
+            "max_value": 248320,
+            "cost": "filters proposal logits and the same cached q before sampling only for all-positive-temperature batches; target sampling stays unchanged"
+          },
+          "prose_residual_top_k": {
+            "enabled": false,
+            "reason": "requires the resident residual Top-64 patch, standard rejection, PIECEWISE/NONE graphs and synchronous scheduling",
+            "allowed_values": [
+              null,
+              64
+            ],
+            "cost": "uses Top-64(target) union the rejected draft token only when target_top_k <= 64; otherwise falls back to full-vocabulary residual sampling"
+          },
+          "qad_hot_cache_enabled": {
+            "enabled": false,
+            "reason": "loaded peer_worker is not using native QAD"
+          },
+          "target_only": {
+            "enabled": true,
+            "reason": null,
+            "cost": "bypasses all MTP proposal work between requests; target weights, logits and sampling parameters stay unchanged"
+          },
+          "prose_draft_head_mode": {
+            "enabled": true,
+            "reason": null,
+            "default": "int4",
+            "allowed_values": [
+              "int4",
+              "bf16"
+            ],
+            "preparation": "BF16 is prepared once through the existing MTP builder from the private INT4 head's selected source rows; no target-head or checkpoint replacement",
+            "request_policy": "BF16 proposals are forwarded only for all-positive-temperature batches; greedy and mixed batches remain INT4"
+          },
+          "compact_draft_head_enabled": {
+            "enabled": false,
+            "reason": "MTP compute_logits is the legacy private-head path, not full BF16 mode",
+            "default": false,
+            "allowed_values": [
+              false,
+              true
+            ],
+            "preparation": "first enable copies exact selected rows from the loaded dense BF16 MTP lm_head on its owner device; no INT4 requantization or model reload",
+            "request_policy": "applies to every workload; positive-temperature draft_scale is preserved and standard rejection remains required"
+          },
+          "draft_scale": {
+            "enabled": true,
+            "reason": null
+          },
+          "draft_scale_per_pos": {
+            "enabled": true,
+            "reason": null,
+            "max_length": 15,
+            "value_contract": "null restores global draft_scale; each positive finite entry is a relative multiplier at the zero-based draft position; omitted positions use global draft_scale",
+            "effective_scale": "global draft_scale multiplied by relative[position]",
+            "request_policy": "all-positive-temperature batches only; greedy and mixed batches are unchanged",
+            "same_scaled_filtered_logits_feed_sampler_and_cached_q": true
+          },
+          "code_draft_tokens": {
+            "enabled": false,
+            "reason": "requires the q11 greedy-depth runner field in 1..Kmax, the resident valid-depth patch, standard rejection, PIECEWISE/NONE graphs and synchronous scheduling",
+            "request_policy": "nonempty all-zero-temperature batches only; prose, mixed and empty batches are unchanged"
+          },
+          "prose_max_draft_tokens": {
+            "enabled": true,
+            "reason": null
+          },
+          "prose_confidence_threshold": {
+            "enabled": true,
+            "reason": null,
+            "cost": "computes draft q top-1 probability and synchronizes once after each draft step; disabled by default"
+          },
+          "ple_madvise": {
+            "enabled": true,
+            "reason": null,
+            "cost": "changes only existing file mapping advice between requests; does not pin or modify weights"
+          },
+          "ple_gather_fast_rows": {
+            "enabled": true,
+            "reason": null,
+            "cost": "changes only the serial/parallel threshold of the existing gather executor between requests; no table or executor recreation"
+          }
+        },
+        "phase_profiling": {
+          "supported": false,
+          "enabled": false,
+          "reason": "requires the optional source patch to install real phase begin/end hooks",
+          "attached_hooks": [],
+          "missing_required_hooks": [
+            "execute_model_round_start",
+            "speculator_propose_host",
+            "target_logits",
+            "target_logits_host",
+            "target_model_forward",
+            "target_model_forward_host",
+            "target_rejection_sampler",
+            "target_rejection_sampler_host",
+            "target_sampler",
+            "target_sampler_host"
+          ],
+          "record_function_ranges": [],
+          "round_helper_device": null,
+          "timings": null
+        },
+        "draft_head": {
+          "control_version": 1,
+          "mode": "int4",
+          "supported": true,
+          "prepared": false,
+          "int4_state_ready": true,
+          "int4_bytes": 86507520,
+          "bf16_bytes": null,
+          "active_bytes": 86507520,
+          "byte_scope": "head matrix weights only; excludes temporary preparation buffers and Marlin workspace",
+          "matrix": {
+            "source_id_count": 65536,
+            "input_features": 2560,
+            "output_features": 65536,
+            "vocab_size": 248320,
+            "device": "cuda:0"
+          },
+          "scale": {
+            "logits_processor_scale": 1,
+            "binding": "existing single logits_processor.scale control scalar",
+            "value_scope": "configured value only; status does not prove private-head output application",
+            "application_verified": false,
+            "application_evidence_required": "Q7 runtime output comparison for both INT4 and BF16 head paths"
+          },
+          "source_quality_scope": "BF16 reconstructs the same selected MTP proposal rows through the existing _dv_build; proposal-only, with target logits, target head and target weights unchanged",
+          "request_policy": "all-positive-temperature batches may use the configured mode; greedy and mixed batches use INT4",
+          "implicit_prepare_or_fallback": false,
+          "unsupported_reason": null
+        },
+        "compact_draft_head": {
+          "supported": false,
+          "prepared": false,
+          "enabled": false,
+          "mode": "full_original",
+          "draft_scale": 1,
+          "draft_scale_applies_only_to_positive_temperature_batches": true,
+          "selected_count": null,
+          "selected_weight_bytes": 0,
+          "selected_ids_bytes": 0,
+          "persistent_bytes": 0,
+          "byte_scope": "prepared BF16 selected matrix plus persistent int64 IDs; excludes temporary preparation buffers and full MTP lm_head",
+          "source_evidence": {},
+          "unsupported_reason": "MTP compute_logits is the legacy private-head path, not full BF16 mode"
+        },
+        "qad_hot_cache": {
+          "ready": false,
+          "enabled": null,
+          "layers": 0,
+          "reason": "loaded peer_worker is not using native QAD"
+        },
+        "acceptance_metrics": {
+          "available_via": "resident API server /metrics; read before and after each experiment",
+          "worker_rpc_estimates": false,
+          "metric_names": [
+            "vllm:spec_decode_num_drafts_total",
+            "vllm:spec_decode_num_draft_tokens_total",
+            "vllm:spec_decode_num_accepted_tokens_total",
+            "vllm:spec_decode_num_accepted_tokens_per_pos_total"
+          ]
+        },
+        "ple_mmap": {
+          "ready": true,
+          "tables": [
+            {
+              "backend": "MmapPleTable",
+              "mode": "normal",
+              "mapped_planes": 128,
+              "mapped_payload_bytes": 51200245760
+            }
+          ],
+          "reason": null,
+          "pin_claimed": false,
+          "scope": "existing file-backed mappings only; no tensor or hash changes"
+        },
+        "ple_gather": {
+          "schema": "resident-ple-gather-control-v1",
+          "ready": true,
+          "tables": [
+            {
+              "layers": [
+                "language_model.model.layers.1.ple.ple_embedding"
+              ],
+              "backend": "MmapPleTable",
+              "wrappers": [],
+              "fast_rows": 512,
+              "fast_rows_in_control_range": true,
+              "parallel_branch_for_nonempty_batches": false,
+              "existing_executor_reused": true,
+              "mapped_shards": 128,
+              "rows_total": 320001536,
+              "row_bytes": 160
+            }
+          ],
+          "reason": null,
+          "fast_rows_range": [
+            0,
+            512
+          ],
+          "pin_claimed": false,
+          "scope": "mutates only fast_rows on already-loaded registered MmapPleTable objects; does not recreate tables, alter weights/headers/hash state, or claim pinning"
+        },
+        "distribution_contract": {
+          "target_sampling_parameters_are_not_modified": true,
+          "target_full_model_head_layers_experts_are_not_modified": true,
+          "standard_rejection_is_required": true,
+          "draft_changes_affect_proposals_only": true,
+          "draft_scale_per_pos_changes_proposals_only": true,
+          "compact_draft_head_changes_proposals_only": true,
+          "compact_draft_head_source_is_dense_bf16_mtp_lm_head": true,
+          "compact_draft_head_never_requantizes_to_int4": true,
+          "confidence_is_draft_q_top1_probability_not_target_acceptance_probability_or_quality": true
+        }
+      }
+    ],
+    "peer_inventory": [
+      {
+        "placement": [
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.0.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.1.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.2.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.3.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.4.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.5.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.6.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.7.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.8.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.9.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.10.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.11.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.12.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.13.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.14.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.15.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.16.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.17.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.18.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.19.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.20.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.21.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.22.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.23.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.24.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.25.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.26.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.27.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.28.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.29.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.30.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.31.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.32.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.33.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.34.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.35.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.36.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.37.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.38.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.39.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.40.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.41.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.42.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.43.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.44.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.45.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.46.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextForConditionalGeneration.language_model.model.layers.47.mlp.experts.routed_experts",
+            "draft": false,
+            "device": 1,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          },
+          {
+            "module": "Qwen3_8FlashNextMTP.model.layers.0.mlp.experts.routed_experts",
+            "draft": true,
+            "device": 0,
+            "class": "AutoGPTQMoEMethod",
+            "bytes": 1307443200
+          }
+        ],
+        "counters": {
+          "remote_calls": 6432,
+          "activation_bytes": 1505978880,
+          "helper_graph_captures": 144,
+          "helper_graph_replays": 6240,
+          "async_event_bridges": 6432,
+          "shared_overlap_defers": 0
+        },
+        "allocated": [
+          23633521152,
+          62937854976
+        ],
+        "numeric_adapters": {},
+        "transport_diagnostics": {
+          "enabled": false,
+          "record_function_enabled": false,
+          "target_cudagraph_mode": "NONE",
+          "helper_graph_scope": "TransferArena QWEN38_HELPER_GRAPHS; separate from target_cudagraph_mode",
+          "helper_transfer_arenas": []
+        },
+        "runtime_controls": {
+          "peer_async_transfers": {
+            "environment_enabled": true,
+            "arena_states": [
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              }
+            ],
+            "consistent": true
+          },
+          "peer_shared_overlap": {
+            "runtime_enabled": false,
+            "environment_enabled": false,
+            "consistent": true
+          }
+        }
+      }
+    ],
+    "peer_state_verified": {
+      "state": {
+        "peer_async_transfers": true,
+        "peer_shared_overlap": false
+      },
+      "workers": [
+        {
+          "worker_index": 0,
+          "peer_async_transfers": {
+            "environment_enabled": true,
+            "arena_states": [
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              },
+              {
+                "owner": 0,
+                "helper": 1,
+                "async_transfers": true
+              }
+            ],
+            "consistent": true
+          },
+          "peer_shared_overlap": {
+            "runtime_enabled": false,
+            "environment_enabled": false,
+            "consistent": true
+          }
+        }
+      ],
+      "arena_count": 6
+    },
+    "ple_observation": [
+      {
+        "schema": "ple-mmap-diagnostics-v1",
+        "ready": true,
+        "reason": null,
+        "sampled_at_monotonic_ns": 48536774820356,
+        "page_size": 4096,
+        "mincore": {
+          "available": true,
+          "error": null,
+          "page_size": 4096,
+          "payload_intersecting_pages": 12500097,
+          "resident_pages_intersecting_payload": 12432292,
+          "mincore_calls": 128
+        },
+        "totals": {
+          "payload_bytes": 51200245760,
+          "unique_payload_bytes": 51200245760,
+          "resident_payload_bytes": 50922533472,
+          "missing_payload_bytes": 277712288
+        },
+        "tables": [
+          {
+            "backend": "MmapPleTable",
+            "mode": "normal",
+            "mapped_planes": 128,
+            "payload_bytes": 51200245760,
+            "unique_payload_bytes": 51200245760,
+            "resident_payload_bytes": 50922533472,
+            "mappings": [
+              {
+                "path": "/home/user/ple-table-int4/model-00005-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539725,
+                "file_bytes": 1717267690,
+                "payload_offset_bytes": 917263850,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 394365824
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00005-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539725,
+                "file_bytes": 1717267690,
+                "payload_offset_bytes": 1317265770,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397249408
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00006-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539726,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399986688
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00006-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539726,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398528512
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00006-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539726,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398923016
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00006-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539726,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399309696
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00007-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539727,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398364168
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00007-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539727,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398164472
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00007-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539727,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397340672
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00007-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539727,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399913096
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00008-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539728,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 395091464
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00008-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539728,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397652472
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00008-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539728,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398599432
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00008-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539728,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397290368
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00009-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539729,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398257528
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00009-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539729,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 393054600
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00009-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539729,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397609856
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00009-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539729,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00010-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539730,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399989632
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00010-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539730,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 396934016
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00010-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539730,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398818176
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00010-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539730,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00011-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539731,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398011912
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00011-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539731,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 395160448
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00011-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539731,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398321272
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00011-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539731,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 385859720
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00012-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539732,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398225408
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00012-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539732,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397977992
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00012-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539732,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399996536
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00012-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539732,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397815944
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00013-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539733,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399986184
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00013-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539733,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397904768
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00013-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539733,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399928192
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00013-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539733,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00014-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539734,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 384765952
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00014-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539734,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398285192
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00014-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539734,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399608704
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00014-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539734,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00015-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539735,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398506880
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00015-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539735,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 391594488
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00015-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539735,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397979648
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00015-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539735,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398753928
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00016-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539736,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 395816456
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00016-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539736,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399999480
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00016-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539736,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 394745096
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00016-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539736,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399383424
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00017-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539737,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399998472
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00017-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539737,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399012344
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00017-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539737,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398290944
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00017-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539737,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 395669640
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00018-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539738,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 392286208
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00018-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539738,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 396464128
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00018-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539738,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399826944
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00018-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539738,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399282312
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00019-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539739,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398454784
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00019-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539739,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 396009472
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00019-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539739,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 393168136
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00019-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539739,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399289216
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00020-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539740,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398131200
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00020-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539740,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398422016
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00020-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539740,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398721024
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00020-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539740,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398782600
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00021-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539741,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399998472
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00021-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539741,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 393191928
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00021-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539741,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 394149888
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00021-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539741,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399822984
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00022-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539742,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00022-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539742,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399012344
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00022-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539742,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398721024
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00022-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539742,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399913096
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00023-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539743,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00023-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539743,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399999480
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00023-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539743,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399934728
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00023-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539743,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399891328
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00024-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539744,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399998328
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00024-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539744,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398143488
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00024-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539744,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 395427840
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00024-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539744,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399900808
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00025-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539745,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 391835000
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00025-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539745,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398422016
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00025-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539745,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 395056392
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00025-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539745,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00026-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539746,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398551936
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00026-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539746,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399012344
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00026-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539746,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398894344
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00026-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539746,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 387754880
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00027-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539747,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 387218808
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00027-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539747,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399448456
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00027-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539747,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399824504
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00027-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539747,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399913096
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00028-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539748,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398458232
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00028-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539748,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398458880
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00028-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539748,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397169928
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00028-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539748,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399903480
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00029-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539749,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 648,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398458232
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00029-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539749,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 400002568,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398458880
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00029-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539749,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 800004488,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398458880
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00029-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539749,
+                "file_bytes": 1600008328,
+                "payload_offset_bytes": 1200006408,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398340232
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00030-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539750,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 800004496,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 391546128
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00030-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539750,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 1200006416,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399936240
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00030-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539750,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 656,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00030-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539750,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 400002576,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399999472
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00031-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539751,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 656,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00031-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539751,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 400002576,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397634432
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00031-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539751,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 800004496,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397364096
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00031-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539751,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 1200006416,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00032-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539752,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 656,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397098352
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00032-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539752,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 400002576,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398458880
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00032-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539752,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 800004496,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398894352
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00032-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539752,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 1200006416,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00033-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539753,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 656,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 397200912
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00033-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539753,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 400002576,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00033-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539753,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 800004496,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399566448
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00033-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539753,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 1200006416,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398340240
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00034-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539754,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 656,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00034-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539754,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 400002576,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 399997824
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00034-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539754,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 800004496,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00034-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539754,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 1200006416,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398199680
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00035-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539755,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 656,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398458224
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00035-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539755,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 400002576,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398458880
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00035-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539755,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 800004496,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398894352
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00035-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539755,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 1200006416,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00036-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539756,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 656,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00036-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539756,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 400002576,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 388678128
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00036-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539756,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 800004496,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398894352
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00036-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539756,
+                "file_bytes": 1600008336,
+                "payload_offset_bytes": 1200006416,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 400001920
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00037-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539757,
+                "file_bytes": 942343240,
+                "payload_offset_bytes": 142339400,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398725816
+              },
+              {
+                "path": "/home/user/ple-table-int4/model-00037-of-00131.safetensors",
+                "file_device": 2081,
+                "file_inode": 1140539757,
+                "file_bytes": 942343240,
+                "payload_offset_bytes": 542341320,
+                "payload_bytes": 400001920,
+                "unique_payload_bytes": 400001920,
+                "resident_payload_bytes": 398529608
+              }
+            ]
+          }
+        ],
+        "process": {
+          "io": {
+            "available": true,
+            "values": {
+              "rchar": 125395913939,
+              "wchar": 433341957,
+              "syscr": 195752,
+              "syscw": 1927,
+              "read_bytes": 172677857280,
+              "write_bytes": 436039680,
+              "cancelled_write_bytes": 1507328
+            },
+            "error": null
+          },
+          "stat": {
+            "available": true,
+            "values": {
+              "minor_faults": 1191881,
+              "child_minor_faults": 228647,
+              "major_faults": 5894,
+              "child_major_faults": 10
+            },
+            "error": null
+          },
+          "smaps_rollup": {
+            "available": true,
+            "values": {
+              "00400000-ffffe5213000 ---p 00000000 00": 0,
+              "Rss_bytes": 1689804800,
+              "Pss_bytes": 1581113344,
+              "Pss_Dirty_bytes": 290185216,
+              "Pss_Anon_bytes": 273747968,
+              "Pss_File_bytes": 1251627008,
+              "Pss_Shmem_bytes": 55738368,
+              "Shared_Clean_bytes": 212836352,
+              "Shared_Dirty_bytes": 0,
+              "Private_Clean_bytes": 1186783232,
+              "Private_Dirty_bytes": 290185216,
+              "Referenced_bytes": 538177536,
+              "Anonymous_bytes": 273747968,
+              "KSM_bytes": 0,
+              "LazyFree_bytes": 0,
+              "AnonHugePages_bytes": 52428800,
+              "ShmemPmdMapped_bytes": 0,
+              "FilePmdMapped_bytes": 0,
+              "Shared_Hugetlb_bytes": 0,
+              "Private_Hugetlb_bytes": 0,
+              "Swap_bytes": 3407253504,
+              "SwapPss_bytes": 3407253504,
+              "Locked_bytes": 16384
+            },
+            "error": null
+          },
+          "status": {
+            "available": true,
+            "values": {
+              "Umask": 22,
+              "Tgid": 83,
+              "Ngid": 0,
+              "Pid": 83,
+              "PPid": 7,
+              "TracerPid": 0,
+              "Uid": 0,
+              "Gid": 0,
+              "FDSize": 512,
+              "Groups": 0,
+              "NStgid": 83,
+              "NSpid": 83,
+              "NSpgid": 1,
+              "NSsid": 1,
+              "Kthread": 0,
+              "VmPeak_bytes": 191364317184,
+              "VmSize_bytes": 191364317184,
+              "VmLck_bytes": 16384,
+              "VmPin_bytes": 0,
+              "VmHWM_bytes": 83445768192,
+              "VmRSS_bytes": 68021252096,
+              "RssAnon_bytes": 273747968,
+              "RssFile_bytes": 1360318464,
+              "RssShmem_bytes": 66387185664,
+              "VmData_bytes": 6057738240,
+              "VmStk_bytes": 139264,
+              "VmExe_bytes": 6348800,
+              "VmLib_bytes": 2973212672,
+              "VmPTE_bytes": 54738944,
+              "VmSwap_bytes": 3407253504,
+              "HugetlbPages_bytes": 0,
+              "CoreDumping": 0,
+              "THP_enabled": 1,
+              "Threads": 84,
+              "SigPnd": 0,
+              "ShdPnd": 0,
+              "SigBlk": 0,
+              "SigIgn": 1000,
+              "CapInh": 0,
+              "CapAmb": 0,
+              "NoNewPrivs": 0,
+              "Seccomp": 2,
+              "Seccomp_filters": 1,
+              "Mems_allowed_list": 0,
+              "voluntary_ctxt_switches": 129391,
+              "nonvoluntary_ctxt_switches": 5869
+            },
+            "error": null
+          },
+          "meminfo": {
+            "available": true,
+            "values": {
+              "MemTotal_bytes": 130663231488,
+              "MemFree_bytes": 924184576,
+              "MemAvailable_bytes": 59196194816,
+              "Buffers_bytes": 26988544,
+              "Cached_bytes": 54363676672,
+              "SwapCached_bytes": 78925824,
+              "Active_bytes": 3599060992,
+              "Inactive_bytes": 52292182016,
+              "Active(anon)_bytes": 510697472,
+              "Inactive(anon)_bytes": 1165807616,
+              "Active(file)_bytes": 3088363520,
+              "Inactive(file)_bytes": 51126374400,
+              "Unevictable_bytes": 30826496,
+              "Mlocked_bytes": 26963968,
+              "SwapTotal_bytes": 17179865088,
+              "SwapFree_bytes": 12805718016,
+              "Zswap_bytes": 0,
+              "Zswapped_bytes": 0,
+              "Dirty_bytes": 2637824,
+              "Writeback_bytes": 0,
+              "AnonPages_bytes": 1518534656,
+              "Mapped_bytes": 1618759680,
+              "Shmem_bytes": 164507648,
+              "KReclaimable_bytes": 5225684992,
+              "Slab_bytes": 1137160192,
+              "SReclaimable_bytes": 460955648,
+              "SUnreclaim_bytes": 676204544,
+              "KernelStack_bytes": 16318464,
+              "ShadowCallStack_bytes": 4165632,
+              "PageTables_bytes": 83398656,
+              "SecPageTables_bytes": 6873088,
+              "NFS_Unstable_bytes": 0,
+              "Bounce_bytes": 0,
+              "WritebackTmp_bytes": 0,
+              "CommitLimit_bytes": 82511478784,
+              "Committed_AS_bytes": 12271157248,
+              "VmallocTotal_bytes": 138535235485696,
+              "VmallocUsed_bytes": 580943872,
+              "VmallocChunk_bytes": 0,
+              "Percpu_bytes": 24985600,
+              "HardwareCorrupted_bytes": 0,
+              "AnonHugePages_bytes": 52428800,
+              "ShmemHugePages_bytes": 0,
+              "ShmemPmdMapped_bytes": 0,
+              "FileHugePages_bytes": 81788928,
+              "FilePmdMapped_bytes": 0,
+              "CmaTotal_bytes": 134217728,
+              "CmaFree_bytes": 70983680,
+              "Balloon_bytes": 0,
+              "HugePages_Total": 0,
+              "HugePages_Free": 0,
+              "HugePages_Rsvd": 0,
+              "HugePages_Surp": 0,
+              "Hugepagesize_bytes": 2097152,
+              "Hugetlb_bytes": 0
+            },
+            "error": null
+          },
+          "units": "kB memory fields are converted to bytes; other counters retain proc units"
+        },
+        "gather_counters": {
+          "available": true,
+          "source": "vllm_ple_mmap._STATS",
+          "values": {
+            "calls": 129,
+            "op_ms": 18060.74323503708,
+            "gather_ms": 17961.985671980074,
+            "rows": 14920,
+            "bytes": 2387200
+          },
+          "window_started_at_monotonic_seconds": 48505.845013274,
+          "windowed_fields": [
+            "calls",
+            "op_ms",
+            "gather_ms",
+            "rows",
+            "bytes"
+          ],
+          "cumulative_fields": [
+            "pf_hit",
+            "pf_miss"
+          ],
+          "reset_note": "_stats_log resets windowed fields; compare only within one unchanged window",
+          "error": null
+        },
+        "pin_claimed": false,
+        "scope": "read-only mincore and proc snapshots of existing file-backed PLE mappings; page-cache residency is not RAM pinning"
+      }
+    ],
+    "observation_only_no_generation": true
+  },
+  "artifacts": {
+    "envelope_path": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/a-sep-e-k6-open-code-01.json",
+    "state_dir": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/a-sep-e-k6-open-code-01",
+    "history_path": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/a-sep-e-k6-open-code-01/native/bench-history.json",
+    "active_path": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/a-sep-e-k6-open-code-01/native/bench-active.json"
+  },
+  "status": "completed",
+  "failure": null,
+  "limitations": {
+    "complete_http_or_sse_raw_exposed": false,
+    "warmup_or_calibration_individual_results_exposed": false,
+    "prefill_individual_attempts_exposed": false,
+    "prefill_public_result": "One median-rate row per size plus samples/samplesRequested counts; the pinned source does not expose individual attempt results. Errors/notices exposed by the public job are preserved without reconstruction.",
+    "cached_tokens_zero_means": "Upstream uses 0 for unknown/none; 0 alone does not prove absence of a prefix-cache hit. Parent fresh server configuration is separate evidence."
+  }
+}

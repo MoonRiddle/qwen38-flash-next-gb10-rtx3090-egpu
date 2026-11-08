@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1240" width="1000" height="1240" font-family="sans-serif" font-size="14">
+  <title>GB10 + RTX 3090 placement for Qwen3.8-Flash-Next INT4, and why the decode numbers move</title>
+  <desc>Panel A: 409,600 single request. Panel B: 340,000 two requests. Panel C: one decode step - target on GB10, draft on RTX 3090, QSA top-k selection, KV read.</desc>
+
+  <rect x="0" y="0" width="1000" height="1240" fill="#111111"/>
+
+  <text x="20" y="28" font-size="14" fill="#e6e6e6">Qwen3.8-Flash-Next INT4 on GB10 and RTX 3090</text>
+  <text x="20" y="46" font-size="14" fill="#e6e6e6">What runs where, and why the numbers move</text>
+  <text x="20" y="64" font-size="13" fill="#a0a0a0">PCIe Gen4 x4, non-P2P: transfers cross host memory, so the body stays on the GB10</text>
+  <text x="20" y="68" font-size="13" fill="#a0a0a0">and only the per-step working set sits on the 3090.</text>
+
+  <text x="20" y="92" font-size="14" fill="#e6e6e6">A. 409600 window, one request</text>
+
+
+  <rect x="20" y="96" width="440" height="240" rx="10" fill="#111111" stroke="#555555" stroke-width="1.5"/>
+  <text x="34" y="120" fill="#e6e6e6">GB10 · 121.7 GiB unified memory</text>
+
+  <rect x="34" y="136" width="412" height="56" rx="6" fill="#1c1c1c" stroke="#6ea8fe" stroke-width="1.2"/>
+  <text x="46" y="157" fill="#e6e6e6">Target weights · 62.8 GB resident</text>
+  <text x="46" y="177" font-size="13" fill="#a0a0a0">all 512 routed experts · top-5 routing · 4.8B active</text>
+
+  <rect x="34" y="206" width="412" height="40" rx="6" fill="#1c1c1c" stroke="#6bd6a0" stroke-width="1.2"/>
+  <text x="46" y="231" fill="#e6e6e6">PLE n-gram table · 51 GiB mmapped from USB</text>
+
+  <rect x="34" y="260" width="412" height="56" rx="6" fill="#1c1c1c" stroke="#e0b36e" stroke-width="1.2"/>
+  <text x="46" y="281" fill="#e6e6e6">Target expert forward</text>
+  <text x="46" y="301" font-size="13" fill="#a0a0a0">owner activations cross the host hop</text>
+
+  <rect x="560" y="96" width="420" height="240" rx="10" fill="#111111" stroke="#555555" stroke-width="1.5"/>
+  <text x="574" y="120" fill="#e6e6e6">RTX 3090 · 24 GiB · device 0</text>
+
+  <rect x="574" y="136" width="392" height="56" rx="6" fill="#1c1c1c" stroke="#d98bd6" stroke-width="1.2"/>
+  <text x="586" y="157" fill="#e6e6e6">KV cache · fp8_e5m2 · 14 GiB</text>
+  <text x="586" y="177" font-size="13" fill="#a0a0a0">427,468 tokens admitted · 1.04x</text>
+
+  <rect x="574" y="206" width="392" height="40" rx="6" fill="#1c1c1c" stroke="#e08a8a" stroke-width="1.2"/>
+  <text x="586" y="231" font-size="13" fill="#e6e6e6">Draft MTP head · int4 · 65,536 of 248,320 rows</text>
+
+  <rect x="574" y="260" width="392" height="40" rx="6" fill="#1c1c1c" stroke="#8fd0e0" stroke-width="1.2"/>
+  <text x="586" y="285" font-size="13" fill="#e6e6e6">Hot-expert cache · 4 GiB owner budget</text>
+
+  <line x1="474" y1="226" x2="546" y2="226" stroke="#777777" stroke-width="2"/>
+  <path d="M462,226 L474,220 L474,232 Z" fill="#777777"/>
+  <path d="M558,226 L546,220 L546,232 Z" fill="#777777"/>
+  <text x="510" y="210" font-size="12" text-anchor="middle" fill="#a0a0a0">host hop</text>
+
+  <rect x="20" y="348" width="960" height="40" rx="8" fill="#161616" stroke="#444444" stroke-width="1.2"/>
+  <text x="34" y="372" font-size="13" fill="#a0a0a0">409,600 window · C=1 medians: code 185.89 · prose 67.28 tok/s · KV 427,468 tokens (1.04x)</text>
+
+  <text x="20" y="418" font-size="14" fill="#e6e6e6">B. 340000 window, two requests</text>
+
+  <rect x="20" y="430" width="440" height="260" rx="10" fill="#111111" stroke="#555555" stroke-width="1.5"/>
+  <text x="34" y="454" fill="#e6e6e6">GB10 · 121.7 GiB unified memory</text>
+
+  <rect x="34" y="466" width="412" height="40" rx="6" fill="#1c1c1c" stroke="#6ea8fe" stroke-width="1.2"/>
+  <text x="46" y="491" font-size="13" fill="#e6e6e6">Target weights · 62.8 GB · shared by both requests</text>
+
+  <rect x="34" y="532" width="412" height="40" rx="6" fill="#1c1c1c" stroke="#6bd6a0" stroke-width="1.2"/>
+  <text x="46" y="557" font-size="13" fill="#e6e6e6">PLE n-gram table · 51 GiB mmapped from USB</text>
+
+  <rect x="34" y="598" width="412" height="56" rx="6" fill="#1c1c1c" stroke="#e0b36e" stroke-width="1.2"/>
+  <text x="46" y="619" fill="#e6e6e6">Two request streams · max-num-seqs 2</text>
+  <text x="46" y="639" font-size="13" fill="#a0a0a0">each slot up to 315,864 tokens</text>
+
+  <rect x="560" y="430" width="420" height="260" rx="10" fill="#111111" stroke="#555555" stroke-width="1.5"/>
+  <text x="574" y="454" fill="#e6e6e6">RTX 3090 · 24 GiB · device 0</text>
+
+  <rect x="574" y="466" width="392" height="76" rx="6" fill="#1c1c1c" stroke="#d98bd6" stroke-width="1.2"/>
+  <text x="586" y="487" fill="#e6e6e6">KV cache · fp8_e5m2 · 14 GiB</text>
+  <text x="586" y="507" font-size="13" fill="#a0a0a0">631,728 tokens admitted · 1.86x</text>
+  <text x="586" y="527" font-size="13" fill="#a0a0a0">two slots · 315,864 tokens each</text>
+
+  <rect x="574" y="556" width="392" height="40" rx="6" fill="#1c1c1c" stroke="#e08a8a" stroke-width="1.2"/>
+  <text x="586" y="581" font-size="13" fill="#e6e6e6">Draft MTP head · same int4</text>
+
+  <rect x="574" y="610" width="392" height="40" rx="6" fill="#1c1c1c" stroke="#8fd0e0" stroke-width="1.2"/>
+  <text x="586" y="635" font-size="13" fill="#e6e6e6">Hot-expert cache · same 4 GiB owner budget</text>
+
+  <line x1="474" y1="560" x2="546" y2="560" stroke="#777777" stroke-width="2"/>
+  <path d="M462,560 L474,554 L474,566 Z" fill="#777777"/>
+  <path d="M558,560 L546,554 L546,566 Z" fill="#777777"/>
+  <text x="510" y="544" font-size="12" text-anchor="middle" fill="#a0a0a0">host hop</text>
+
+  <rect x="20" y="702" width="960" height="52" rx="8" fill="#161616" stroke="#444444" stroke-width="1.2"/>
+  <text x="34" y="724" font-size="13" fill="#a0a0a0">340,000 window · C=2 medians: code 86.79 per request · 163.46 aggregate</text>
+  <text x="34" y="742" font-size="13" fill="#a0a0a0">prose 40.16 per request · 78.35 aggregate · short prompts C=2 260.81 / 86.60, C=4 302.98 / 115.28</text>
+
+  <text x="20" y="784" font-size="14" fill="#e6e6e6">C. Why the numbers move - one decode step</text>
+
+  <rect x="20" y="802" width="960" height="52" rx="8" fill="#1c1c1c" stroke="#6ea8fe" stroke-width="1.4"/>
+  <text x="34" y="832" fill="#e6e6e6">1 · Target step on GB10 - 512 routed experts, top-5 routing, 4.8B active</text>
+
+  <line x1="500" y1="856" x2="500" y2="868" stroke="#666666" stroke-width="2"/>
+  <path d="M500,876 L494,866 L506,866 Z" fill="#666666"/>
+
+  <rect x="20" y="876" width="960" height="52" rx="8" fill="#1c1c1c" stroke="#d98bd6" stroke-width="1.4"/>
+  <text x="34" y="906" fill="#e6e6e6">2 · Draft 15 tokens on RTX 3090 - int4 MTP head, 65,536 of 248,320 rows</text>
+
+  <line x1="500" y1="930" x2="500" y2="942" stroke="#666666" stroke-width="2"/>
+  <path d="M500,950 L494,940 L506,940 Z" fill="#666666"/>
+
+  <rect x="20" y="950" width="960" height="52" rx="8" fill="#1c1c1c" stroke="#6bd6a0" stroke-width="1.4"/>
+  <text x="34" y="980" fill="#e6e6e6">3 · QSA top-k selection - only the top-k keys per token are read</text>
+
+  <line x1="500" y1="1004" x2="500" y2="1016" stroke="#666666" stroke-width="2"/>
+  <path d="M500,1024 L494,1014 L506,1014 Z" fill="#666666"/>
+
+  <rect x="20" y="1024" width="960" height="52" rx="8" fill="#1c1c1c" stroke="#8fd0e0" stroke-width="1.4"/>
+  <text x="34" y="1054" fill="#e6e6e6">4 · KV read on RTX 3090 - fp8_e5m2, 14 GiB, every slot every token</text>
+
+  <text x="20" y="1108" font-size="13" fill="#e6e6e6">Measured results, short prompt (400 forced tokens). These are separate from the four steps above.</text>
+
+  <rect x="20" y="1120" width="960" height="52" rx="8" fill="#161616" stroke="#444444" stroke-width="1.2"/>
+  <text x="34" y="1144" font-size="13" fill="#e6e6e6">code 185.89 @ 409,600 · 114.11 @ 340,000 · C=2 86.79 per request, 163.46 aggregate</text>
+  <text x="34" y="1162" font-size="13" fill="#a0a0a0">prose 67.28 @ 409,600 · 45.85 @ 340,000 · C=2 40.16 per request, 78.35 aggregate</text>
+
+  <text x="20" y="1200" font-size="13" fill="#a0a0a0">Prefill on the same placement: 4K 2,814.48 · 16K 2,698.71 · 32K 2,621.51 tok/s.</text>
+</svg>

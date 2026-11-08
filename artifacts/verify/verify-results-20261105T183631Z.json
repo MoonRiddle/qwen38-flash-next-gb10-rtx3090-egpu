@@ -1,0 +1,40 @@
+{
+  "schema": "recipe-verify-v1",
+  "results": [
+    {
+      "tool": "exact.py",
+      "exit_code": 1,
+      "summary": "#4 nodraft: '{\\n  \"title\": \"The Silver Teacher\\'s Valley\",\\n  \"author\": \"Anonymous\",\\n  \"year\": 2023,\\n  \"subject_tags\": [\\n    \"Surrealism\",\\n    \"Pastoral\",\\n    \"Abstract\"\\n  ]\\n}' #4 conc   : '{\\n  \"title\": \"The Silver Teacher\\'s Valley\",\\n  \"author\": \"Anonymous\",\\n  \"year\": 2023,\\n  \"subject_tags\": [\\n    \"Surrealism\",\\n    \"Pastoral Fiction\",\\n    \"Lamp-lit' FAIL draft: a greedy reply with drafts differs from the same request with \"draft\": false FAIL conc: a reply sent concurrently differs from the same request sent alone dump: /home/user/OMP_Workspace/qwen38-gb10-3090-20261029/verify/exact-drafton.json exact: FAIL",
+      "unchecked_reason": null,
+      "log": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/verify/exact.log"
+    },
+    {
+      "tool": "toolcheck.py",
+      "exit_code": 2,
+      "summary": "toolcheck.py: /v1/chat/completions answered HTTP 400: \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+      "unchecked_reason": null,
+      "log": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/verify/toolcheck.log"
+    },
+    {
+      "tool": "needle.py",
+      "exit_code": 0,
+      "summary": "16384: prompt 16379 tokens (asked ~16384), needle at 60%, prefill not reported, total 8.5 s, answer 'warm-library-4557', found yes",
+      "unchecked_reason": null,
+      "log": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/verify/needle.log"
+    },
+    {
+      "tool": "prompt_reuse.py",
+      "exit_code": 2,
+      "summary": "prompt_reuse.py: /v1/chat/completions answered HTTP 400: This model's maximum context length is 17408 tokens. However, you requested 48 output tokens and your prompt contains at least 17361 input tokens, for a total of at least 17409 tokens. Please reduce the length of the input prompt or the number of requested output tokens. (parameter=input_tokens, val...",
+      "unchecked_reason": null,
+      "log": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/verify/prompt_reuse.log"
+    },
+    {
+      "tool": "context_boundary.py",
+      "exit_code": 0,
+      "summary": "context_boundary: PASS: 16 checks; prompt=20, context=17408",
+      "unchecked_reason": null,
+      "log": "/home/user/OMP_Workspace/qwen38-gb10-3090-20261029/verify/context_boundary.log"
+    }
+  ]
+}

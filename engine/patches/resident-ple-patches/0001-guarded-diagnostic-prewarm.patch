@@ -1,0 +1,106 @@
+--- vllm_ple_mmap.py
++++ vllm_ple_mmap.py
+@@ -29,9 +29,10 @@
+   VLLM_PLE_MMAP=1            enable
+   VLLM_PLE_MMAP_WORKERS=32   gather threads (page faults overlap across threads)
+   VLLM_PLE_MMAP_CHUNK=2048   rows per gather task
+-  VLLM_PLE_MMAP_PREWARM=0    1 = stream the whole table once at load to fill the
+-                             page cache with whatever memory is free (harmless,
+-                             evictable; ~10 s at 4.7 GB/s)
++  VLLM_PLE_MMAP_PREWARM=0    1 = legacy full-payload stream at load;
++                             diagnostic = guarded stream only when
++                             MemAvailable >= missing payload + 10 GiB;
++                             neither profile pins pages; default off
+   VLLM_PLE_MMAP_PREFETCH=0   EXPERIMENTAL: 1 = run the n-gram hash at batch
+                              assembly and gather rows in a worker thread, so
+                              the mid-layer-1 lookup op only copies ready rows
+@@ -216,20 +217,27 @@
+         return out[inverse]
+ 
+     def prewarm(self) -> None:
+-        """Stream every shard once so the page cache holds as much as it can."""
+-        block = 64 << 20
++        """Stream exact shard payloads with one bounded reusable buffer."""
++        block = 4 << 20
++        buffer = bytearray(block)
++        view = memoryview(buffer)
+         for path, mm in zip(self.paths, self.mm):
+             if path is None or mm is None:
+                 continue
+-            start = mm.offset
+-            end = start + mm.shape[0] * mm.shape[1]
++            start = int(mm.offset)
++            remaining = int(mm.nbytes)
+             with open(path, "rb", buffering=0) as f:
+-                pos = start
+-                while pos < end:
+-                    n = f.readinto(bytearray(min(block, end - pos)))  # noqa: F841
+-                    if not n:
+-                        break
+-                    pos += n
++                f.seek(start)
++                while remaining > 0:
++                    requested = min(block, remaining)
++                    count = f.readinto(view[:requested])
++                    if count is None or count <= 0:
++                        raise EOFError(
++                            "PLE shard ended before its mapped payload was read"
++                        )
++                    if count > requested:
++                        raise RuntimeError("PLE shard read exceeded the requested range")
++                    remaining -= count
+ 
+ 
+ # --------------------------------------------------------------------------- #
+@@ -704,9 +712,48 @@
+                 chunk=_env_int("VLLM_PLE_MMAP_CHUNK", 2048),
+             )
+         table = mmap_table
+-        if _env_int("VLLM_PLE_MMAP_PREWARM", 0):
+-            logger.info("PLE mmap: prewarming page cache (%.1f GiB)...", table.rows_total * table.row_bytes / 2**30)
+-            table.prewarm()
++        prewarm_mode = os.environ.get("VLLM_PLE_MMAP_PREWARM", "0").strip().lower()
++        if prewarm_mode == "diagnostic":
++            try:
++                from resident_ple_control import prewarm_ple_table
++
++                result = prewarm_ple_table(mmap_table)
++            except Exception as error:
++                logger.warning(
++                    "PLE mmap: guarded diagnostic prewarm unavailable; "
++                    "continuing without prewarm: %s",
++                    error,
++                )
++            else:
++                log = (
++                    logger.info
++                    if result.get("status") == "completed"
++                    else logger.warning
++                )
++                log(
++                    "PLE mmap: guarded diagnostic prewarm status=%s bytes_read=%s "
++                    "missing_payload_bytes=%s MemAvailable_after=%s reason=%s",
++                    result.get("status"), result.get("bytes_read"),
++                    result.get("missing_payload_bytes"),
++                    result.get("mem_available_after_bytes"), result.get("reason"),
++                )
++        else:
++            try:
++                legacy_prewarm = int(prewarm_mode) != 0
++            except ValueError:
++                legacy_prewarm = False
++                if prewarm_mode not in ("", "false", "no"):
++                    logger.warning(
++                        "PLE mmap: unknown VLLM_PLE_MMAP_PREWARM profile %r; "
++                        "prewarm disabled",
++                        prewarm_mode,
++                    )
++            if legacy_prewarm:
++                logger.info(
++                    "PLE mmap: prewarming page cache (%.1f GiB)...",
++                    table.rows_total * table.row_bytes / 2**30,
++                )
++                table.prewarm()
+         if _env_int("VLLM_PLE_MMAP_PREFETCH", 0):
+             table = PrefetchingMmapTable(mmap_table)
+         self.ngram_embedding.table = table

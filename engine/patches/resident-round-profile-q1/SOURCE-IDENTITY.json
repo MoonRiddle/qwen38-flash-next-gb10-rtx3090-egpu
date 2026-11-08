@@ -1,0 +1,40 @@
+{
+  "schema": "resident-round-profile-source-identity-v1",
+  "container": {
+    "name": "qwen38-resident-a-clean-q1",
+    "image_digest": "sha256:f815c084dceb28bc246822c74e4881e60ae956439fe81ad6887bb549b4638783",
+    "running_at_capture": true
+  },
+  "capture": "Read-only SSH docker exec; SHA-256 rechecked against the installed file; no source writes or deployment",
+  "installed_path": "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu/model_runner.py",
+  "installed_sha256": "e36fea8fd26e9719b8b4cbd6e0db70bdeb448a61515a0b2a1e60ba3eecf63fee",
+  "patch": "0001-resident-round-profile.patch",
+  "apply_guard": "apply-hash-guarded.sh checks the exact source SHA-256 and uses patch --fuzz=0",
+  "runtime_flag": "QWEN38_ROUND_PROFILE=1; set QWEN38_ROUND_RECORD_FUNCTION=1 only for native record_function traces",
+  "unset_behavior": "No wrapper installation unless QWEN38_ROUND_PROFILE=1; no record_function contexts unless both flags are enabled; installer runs only at runner initialization",
+  "scope": [
+    "GPUModelRunner.execute_model outer round and preallocated 64-slot CPU/owner/helper start ring",
+    "GPUModelRunner.sample verification",
+    "GPUModelRunner.sample_tokens proposal/output overall",
+    "eager target-forward source callsite and target compute_logits boundary",
+    "ModelCudaGraphManager.run_pw_graph outer target-forward call boundary",
+    "concrete runtime sampler and rejection-sampler __call__ boundaries",
+    "runtime concrete speculator.propose host boundary",
+    "actual attached-hook and record_function-range status",
+    "direct consecutive execute_model start intervals; excludes initial prefill and final unpaired start",
+    "GPUModelRunner.gather_batch_req_state CPU BatchReqState.is_prefilling_np plus scheduled_spec_decode_tokens classify each start",
+  ],
+  "instrumentation_limits": [
+    "Python call boundaries only",
+    "eager timing wraps the runner caller; it does not replace the target model class __call__",
+    "no compiled tensor internals, new events in generation, generation synchronization, or tensor value extraction",
+    "all event handles are recorded and completion-checked with per-device stream synchronization during configuration before enable",
+    "phase classification reads BatchReqState CPU prefill-mask values and scheduler Python dict/list metadata",
+    "phase event ranges sample one in 16; direct round start events are recorded per execute_model only while enabled",
+    "record_function contexts and reported ranges require the separate QWEN38_ROUND_RECORD_FUNCTION=1 flag",
+    "CPU, owner, and helper intervals are separate; overlapping device times are never summed",
+    "owner/helper event elapsed time is reported only for adjacent starts on the same CUDA stream",
+    "not deployed; apply only if native profiler attribution is insufficient"
+  ],
+  "lsp_references": "Unavailable: read xd://lsp returned No such tool; used exact installed-source hash and direct callsite inspection"
+}

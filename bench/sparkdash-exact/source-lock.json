@@ -1,0 +1,132 @@
+{
+  "schema": "sparkdash-exact-source-lock-v1",
+  "repo": "https://github.com/MiaAI-Lab/sparkDash",
+  "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee",
+  "commit_short": "7c2b963",
+  "retrieved_at": "2026-11-03T19:21:01.513824+00:00",
+  "retrieval_method": "git clone --filter=blob:none --no-checkout https://github.com/MiaAI-Lab/sparkDash.git into a temporary directory, then git cat-file blob <commit>:<path> per file (byte-exact blob content, no checkout transforms)",
+  "license": "Apache-2.0",
+  "license_files": [
+    "LICENSE",
+    "LICENSE-MIT",
+    "NOTICE"
+  ],
+  "files": [
+    {
+      "path": "server/collectors/DecodeBench.js",
+      "role": "native decode collector (DecodeBenchManager, decodeBenchManager, DECODE_BENCH_DEFAULTS)",
+      "sha256": "1da7a50f7f2fc635331d80a579294fc1b014095250c1382c12fc6e3f4d56ffd3",
+      "bytes": 41800,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/server/collectors/DecodeBench.js",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "server/collectors/PrefillBench.js",
+      "role": "native prefill collector (PrefillBenchManager, prefillBenchManager, PREFILL_BENCH_DEFAULTS, runPrefillMeasured)",
+      "sha256": "6454fba7f7813aaad97019afac13c1894a052257464425e30e0929106bcf8164",
+      "bytes": 29566,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/server/collectors/PrefillBench.js",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "server/collectors/LlmStreaming.js",
+      "role": "shared SSE streaming helpers; owns the undici Agent used for every request",
+      "sha256": "e3390785702c7e1bfef169f35d50d8c5c7b76b883f7deafe81fd09f6a96cfaa9",
+      "bytes": 27662,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/server/collectors/LlmStreaming.js",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "server/collectors/contextFill.js",
+      "role": "generic prefill prompt builder and per-size timeout",
+      "sha256": "bc103ddfdacbf52ac848a010b106367bf6cea711144dc25a64b5727304fb2a17",
+      "bytes": 4167,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/server/collectors/contextFill.js",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "server/util/atomicWrite.js",
+      "role": "atomic history/active file writer used by both managers",
+      "sha256": "29daea3fb199c184365710eac9e3086a5b87e09a9f7c33149e45338aa5ab1a41",
+      "bytes": 4779,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/server/util/atomicWrite.js",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "src/shared/llmPrompts.js",
+      "role": "decode prompt catalogue and deterministic C=1 prompt selection",
+      "sha256": "4938e3245d8474f27055bbc66493163e99f1b54885cd5a62a7c7b6507a208bee",
+      "bytes": 14575,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/src/shared/llmPrompts.js",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "src/shared/llmTarget.js",
+      "role": "base URL formatting shared by the collectors",
+      "sha256": "74913ffd206454f31743d8bba76892f12d1204eae21055173bdde3796c793443",
+      "bytes": 2934,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/src/shared/llmTarget.js",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "src/shared/prefillBench.js",
+      "role": "prefill context-size presets and bounds",
+      "sha256": "914d0cbf1f52597ed7080dbd8fdf47815b5b170193c517aabf52dccbac508ff4",
+      "bytes": 2831,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/src/shared/prefillBench.js",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "src/shared/contextFit.js",
+      "role": "context-fit rule used by the prefill manager",
+      "sha256": "e62f92a55abfb8595f4da0fd894c3f824d9ba8765dffc1b8f3597b829e56d652",
+      "bytes": 1819,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/src/shared/contextFit.js",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "LICENSE",
+      "role": "Apache-2.0 license text (upstream)",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/LICENSE",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "LICENSE-MIT",
+      "role": "MIT license text retained by upstream for pre-2.0 contributions",
+      "sha256": "1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685",
+      "bytes": 1056,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/LICENSE-MIT",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    },
+    {
+      "path": "NOTICE",
+      "role": "upstream NOTICE file",
+      "sha256": "1bdd74e322165901d937f43a144a19c627a003c974d71b07d9460e98273dbf9e",
+      "bytes": 788,
+      "source_url": "https://github.com/MiaAI-Lab/sparkDash/blob/7c2b9638b025cd39fb43f95c225de62980f130ee/NOTICE",
+      "commit": "7c2b9638b025cd39fb43f95c225de62980f130ee"
+    }
+  ],
+  "runtime_dependency": {
+    "name": "undici",
+    "version": "8.11.2",
+    "resolved": "https://registry.npmjs.org/undici/-/undici-8.11.2.tgz",
+    "integrity": "sha512-u4UB2/IrKdU6lFxumHmmo1a3fCQO5tzQllRorfoRS63txhrB7xTpSn1PftwC4qEHkOaqP95fCWW4lJzwErwzhQ==",
+    "license": "MIT",
+    "engines_node": ">=22.19.0",
+    "evidence": "package-lock.json packages['node_modules/undici'] at commit 7c2b9638b025cd39fb43f95c225de62980f130ee"
+  },
+  "module_closure_note": "The nine JavaScript source files listed above are the complete static import closure of server/collectors/DecodeBench.js and server/collectors/PrefillBench.js. These vendored source and license files are unmodified upstream blob bytes. Runner, lock, and minimal package configuration are separate local files.",
+  "unmodified_guarantee": "runner.mjs imports the listed source files as-is and calls their exported public APIs (manager constructors/start/getJob/setEventSink, defaults, formatLlmBaseUrl, closeLlmStreamAgent). No monkeypatching, source string replacement, or request rewriting.",
+  "acquisition_comparison": {
+    "previous_commit": "51daebb6aaecfd3dfaeb2ef9055e867024c84c84",
+    "current_commit": "7c2b9638b025cd39fb43f95c225de62980f130ee",
+    "source_or_license_bytes_changed": [
+      "server/collectors/PrefillBench.js",
+      "src/shared/prefillBench.js"
+    ],
+    "method": "Compared each current commit git blob against the previously acquired vendored bytes; no collector module was executed."
+  }
+}

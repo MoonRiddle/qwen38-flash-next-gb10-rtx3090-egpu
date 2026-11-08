@@ -1,0 +1,183 @@
+diff --git a/vllm/models/qwen3_8_flash_next/nvidia/mtp.py b/vllm/models/qwen3_8_flash_next/nvidia/mtp.py
+--- a/vllm/models/qwen3_8_flash_next/nvidia/mtp.py
++++ b/vllm/models/qwen3_8_flash_next/nvidia/mtp.py
+@@ -467,7 +467,16 @@
+     ids, head, vocab = st
+     red = head(hidden_states)
+     if getattr(self, "_resident_apply_draft_scale", False):
+-        red.mul_(self.logits_processor.scale)
++        scale = self.logits_processor.scale
++        relative_scales = getattr(self, "_resident_draft_scale_per_pos", None)
++        if (
++            relative_scales is not None
++            and type(spec_step_idx) is int
++            and 0 <= spec_step_idx < len(relative_scales)
++        ):
++            scale = scale * relative_scales[spec_step_idx]
++        if scale != 1.0:
++            red.mul_(scale)
+     if ids is None:
+         return red[:, :vocab] if red.shape[1] != vocab else red
+     full = red.new_full((red.shape[0], vocab), float("-inf"))
+@@ -660,6 +669,8 @@
+     Qwen3_8FlashNextMTP.compute_logits = _dv_compute_logits  # type: ignore[method-assign]
+     Qwen3_8FlashNextMTP._resident_use_bf16_prose_head = False
+     Qwen3_8FlashNextMTP._resident_apply_draft_scale = False
++    Qwen3_8FlashNextMTP._resident_draft_scale_per_pos = None
++    Qwen3_8FlashNextMTP.resident_draft_scale_per_pos_control_version = 1
+     Qwen3_8FlashNextMTP._resident_prose_bf16_state = None
+     Qwen3_8FlashNextMTP._resident_validate_prose_bf16_state = (
+         _dv_validate_prose_bf16_state
+
+diff --git a/vllm/v1/worker/gpu/spec_decode/speculator.py b/vllm/v1/worker/gpu/spec_decode/speculator.py
+--- a/vllm/v1/worker/gpu/spec_decode/speculator.py
++++ b/vllm/v1/worker/gpu/spec_decode/speculator.py
+@@ -354,6 +354,7 @@
+         draft_logits: torch.Tensor | None,
+         return_confidence: bool = False,
+         prose_draft_top_k: int | None = None,
++        draft_position: int | None = None,
+     ) -> torch.Tensor | tuple[torch.Tensor, torch.Tensor | None]:
+         if prose_draft_top_k is not None and (
+             type(prose_draft_top_k) is not int or prose_draft_top_k <= 0
+@@ -362,7 +363,46 @@
+                 "prose_draft_top_k must be a positive integer"
+             )
+         if draft_logits is not None:
+-            logits = self.model.compute_logits(hidden_states)
++            relative_scales = getattr(
++                self.model, "_resident_draft_scale_per_pos", None
++            )
++            position_api_supported = (
++                type(
++                    getattr(
++                        self,
++                        "resident_draft_scale_per_pos_control_version",
++                        None,
++                    )
++                )
++                is int
++                and self.resident_draft_scale_per_pos_control_version == 1
++                and type(
++                    getattr(
++                        self.model,
++                        "resident_draft_scale_per_pos_control_version",
++                        None,
++                    )
++                )
++                is int
++                and self.model.resident_draft_scale_per_pos_control_version == 1
++            )
++            if (
++                position_api_supported
++                and bool(relative_scales)
++                and getattr(self.model, "_resident_apply_draft_scale", False)
++                and draft_position is None
++            ):
++                raise RuntimeError(
++                    "the per-position MTP path requires an integer draft position"
++                )
++            if position_api_supported and draft_position is not None:
++                if type(draft_position) is not int or draft_position < 0:
++                    raise RuntimeError(
++                        "the per-position MTP path requires an integer draft position"
++                    )
++                logits = self.model.compute_logits(hidden_states, draft_position)
++            else:
++                logits = self.model.compute_logits(hidden_states)
+             confidence = None
+             if prose_draft_top_k is not None:
+                 if prose_draft_top_k > logits.shape[-1]:
+
+diff --git a/vllm/v1/worker/gpu/spec_decode/autoregressive/speculator.py b/vllm/v1/worker/gpu/spec_decode/autoregressive/speculator.py
+--- a/vllm/v1/worker/gpu/spec_decode/autoregressive/speculator.py
++++ b/vllm/v1/worker/gpu/spec_decode/autoregressive/speculator.py
+@@ -45,6 +45,7 @@
+         self.use_fused_multi_step_decode = False
+ 
+         self.resident_prose_control_version = 1
++        self.resident_draft_scale_per_pos_control_version = 1
+         self.resident_draft_top_k_control_version = 1
+         self.resident_draft_head_control_version = 1
+         self.resident_prose_draft_head_mode = "int4"
+@@ -328,11 +329,15 @@
+         resident_mtp_head = (
+             getattr(compute_logits, "__name__", None) == "_dv_compute_logits"
+         )
++        relative_scales = getattr(mtp_model, "_resident_draft_scale_per_pos", None)
+         use_bf16_prose_head = prose_draft_head_mode == "bf16"
+         self._resident_scale_draft_logits = (
+             resident_mtp_head
+             and self._resident_positive_temperature_batch
+-            and getattr(mtp_model.logits_processor, "scale", 1.0) != 1.0
++            and (
++                getattr(mtp_model.logits_processor, "scale", 1.0) != 1.0
++                or bool(relative_scales)
++            )
+         )
+         if resident_mtp_head:
+             mtp_model._resident_use_bf16_prose_head = False
+@@ -664,6 +669,7 @@
+             self.draft_logits,
+             prose_draft_top_k=self._resident_prose_draft_top_k,
+             return_confidence=self._resident_confidence_threshold is not None,
++            draft_position=0,
+         )
+         if isinstance(draft_result, tuple):
+             self.draft_tokens[:num_reqs, 0], self._resident_last_confidence = draft_result
+@@ -725,6 +731,7 @@
+                     slot_mappings_by_layer,
+                     num_tokens_across_dp=num_tokens_across_dp,
+                     cudagraph_runtime_mode=batch_desc.cg_mode,
++                    draft_position=step,
+                 )
+             if self._resident_confidence_stops(confidence):
+                 self.resident_last_valid_draft_tokens = step
+@@ -808,6 +815,7 @@
+                 slot_mappings,
+                 num_tokens_across_dp,
+                 cudagraph_runtime_mode,
++                draft_position=step,
+             )
+             if (
+                 step < self.num_speculative_steps - 1
+@@ -831,6 +839,7 @@
+         slot_mappings: dict[str, torch.Tensor] | None,
+         num_tokens_across_dp: torch.Tensor | None,
+         cudagraph_runtime_mode: CUDAGraphMode = CUDAGraphMode.NONE,
++        draft_position: int | None = None,
+     ) -> torch.Tensor | None:
+         self._prepare_eplb_forward(num_reqs)
+ 
+@@ -863,6 +872,7 @@
+             self.draft_logits,
+             prose_draft_top_k=self._resident_prose_draft_top_k,
+             return_confidence=self._resident_confidence_threshold is not None,
++            draft_position=draft_position,
+         )
+         if isinstance(draft_result, tuple):
+             draft_tokens, confidence = draft_result
+
+diff --git a/vllm/v1/worker/gpu/spec_decode/dflash/speculator.py b/vllm/v1/worker/gpu/spec_decode/dflash/speculator.py
+--- a/vllm/v1/worker/gpu/spec_decode/dflash/speculator.py
++++ b/vllm/v1/worker/gpu/spec_decode/dflash/speculator.py
+@@ -270,6 +270,7 @@
+             self.seeds,
+             self.sample_col[:num_sample],
+             self.draft_logits,
++            draft_position=None,
+         )
+         self.draft_tokens[:num_reqs] = draft_tokens.view(
+             num_reqs, self.num_speculative_steps
+
+diff --git a/vllm/v1/worker/gpu/spec_decode/multi_module_mtp/speculator.py b/vllm/v1/worker/gpu/spec_decode/multi_module_mtp/speculator.py
+--- a/vllm/v1/worker/gpu/spec_decode/multi_module_mtp/speculator.py
++++ b/vllm/v1/worker/gpu/spec_decode/multi_module_mtp/speculator.py
+@@ -419,6 +419,7 @@
+                 self.seeds,
+                 self.current_draft_step,
+                 self.draft_logits,
++                draft_position=step,
+             )
+ 
+             self.draft_tokens[:num_reqs, step] = draft_tokens

@@ -1,0 +1,93 @@
+{
+  "prompts": 6,
+  "max_tokens": 160,
+  "pad": 3000,
+  "lanes": null,
+  "rows": [
+    {
+      "prompt_index": 0,
+      "serial": "917b00a003bc",
+      "nodraft": "5cf5d4fdd839",
+      "conc": "d8f3521d2a68",
+      "serial_token_sha": null,
+      "nodraft_token_sha": null,
+      "finish_reason": "length",
+      "drafts_serial": null,
+      "drafts_nodraft": null,
+      "accepted": null,
+      "same_nodraft": false,
+      "same_conc": false
+    },
+    {
+      "prompt_index": 1,
+      "serial": "ad5e3366bd80",
+      "nodraft": "edcea9b1a6f6",
+      "conc": "0941b4b56150",
+      "serial_token_sha": null,
+      "nodraft_token_sha": null,
+      "finish_reason": "stop",
+      "drafts_serial": null,
+      "drafts_nodraft": null,
+      "accepted": null,
+      "same_nodraft": false,
+      "same_conc": false
+    },
+    {
+      "prompt_index": 2,
+      "serial": "fab6f7306801",
+      "nodraft": "3c46643cad09",
+      "conc": "f579562401d1",
+      "serial_token_sha": null,
+      "nodraft_token_sha": null,
+      "finish_reason": "length",
+      "drafts_serial": null,
+      "drafts_nodraft": null,
+      "accepted": null,
+      "same_nodraft": false,
+      "same_conc": false
+    },
+    {
+      "prompt_index": 3,
+      "serial": "e21338ff5e89",
+      "nodraft": "e21338ff5e89",
+      "conc": "e21338ff5e89",
+      "serial_token_sha": null,
+      "nodraft_token_sha": null,
+      "finish_reason": "stop",
+      "drafts_serial": null,
+      "drafts_nodraft": null,
+      "accepted": null,
+      "same_nodraft": true,
+      "same_conc": true
+    },
+    {
+      "prompt_index": 4,
+      "serial": "34a53d13be47",
+      "nodraft": "331b0fded153",
+      "conc": "3a146b955b65",
+      "serial_token_sha": null,
+      "nodraft_token_sha": null,
+      "finish_reason": "stop",
+      "drafts_serial": null,
+      "drafts_nodraft": null,
+      "accepted": null,
+      "same_nodraft": false,
+      "same_conc": false
+    },
+    {
+      "prompt_index": 5,
+      "serial": "8bcec07269df",
+      "nodraft": "8bcec07269df",
+      "conc": "8bcec07269df",
+      "serial_token_sha": null,
+      "nodraft_token_sha": null,
+      "finish_reason": "length",
+      "drafts_serial": null,
+      "drafts_nodraft": null,
+      "accepted": null,
+      "same_nodraft": true,
+      "same_conc": true
+    }
+  ],
+  "exit_code": 1
+}

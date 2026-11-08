@@ -1,0 +1,315 @@
+--- a/vllm/v1/worker/gpu/model_runner.py
++++ b/vllm/v1/worker/gpu/model_runner.py
+@@ -19,6 +19,7 @@
+ 
+ import functools
+ import gc
++import os
+ import time
+ from copy import deepcopy
+ from typing import Any, NamedTuple
+@@ -161,8 +162,273 @@
+ logger = init_logger(__name__)
+ 
+ 
++_ROUND_PROFILE = os.environ.get("QWEN38_ROUND_PROFILE") == "1"
++_ROUND_RECORD_FUNCTIONS = (
++    _ROUND_PROFILE and os.environ.get("QWEN38_ROUND_RECORD_FUNCTION") == "1"
++)
++
++
++def _round_profile_callable(
++    label,
++    function,
++    phase_name=None,
++    host_name=None,
++    profiler_arg_index=0,
++):
++    @functools.wraps(function)
++    def profiled(*args, **kwargs):
++        owner = args[profiler_arg_index] if len(args) > profiler_arg_index else None
++        profiler = getattr(owner, "_resident_phase_profiler", None)
++        phase_token = (
++            profiler.begin(phase_name)
++            if profiler is not None and phase_name is not None
++            else None
++        )
++        host_started = (
++            profiler.host_begin(host_name)
++            if profiler is not None and host_name is not None
++            else None
++        )
++        try:
++            if _ROUND_RECORD_FUNCTIONS:
++                with torch.profiler.record_function(label):
++                    return function(*args, **kwargs)
++            return function(*args, **kwargs)
++        finally:
++            if profiler is not None:
++                if host_name is not None:
++                    profiler.host_end(host_name, host_started)
++                if phase_name is not None:
++                    profiler.end(phase_token)
++    return profiled
++
++
++def _round_profile_class_method(
++    cls,
++    method_name,
++    label,
++    marker,
++    phase_name=None,
++    host_name=None,
++    profiler_arg_index=0,
++):
++    if cls.__dict__.get(marker, False):
++        return
++    setattr(
++        cls,
++        method_name,
++        _round_profile_callable(
++            label,
++            getattr(cls, method_name),
++            phase_name=phase_name,
++            host_name=host_name,
++            profiler_arg_index=profiler_arg_index,
++        ),
++    )
++    setattr(cls, marker, True)
++
++
++def _round_profile_eager_target_forward(runner, model, model_inputs):
++    profiler = getattr(runner, "_resident_phase_profiler", None)
++    if profiler is None or not profiler.enabled or not profiler._primed:
++        return model(**model_inputs)
++    phase_token = profiler.begin("target_model_forward")
++    host_started = profiler.host_begin("target_model_forward_host")
++    try:
++        if _ROUND_RECORD_FUNCTIONS:
++            with torch.profiler.record_function("vllm.round_profile.target_model_call"):
++                return model(**model_inputs)
++        return model(**model_inputs)
++    finally:
++        profiler.host_end("target_model_forward_host", host_started)
++        profiler.end(phase_token)
++
++
++def _attach_target_round_hooks(runner):
++    model = getattr(runner, "model", None)
++    if model is not None:
++        _round_profile_class_method(
++            type(model),
++            "compute_logits",
++            "vllm.round_profile.target_logits",
++            "_qwen38_round_profile_target_logits",
++            phase_name="target_logits",
++            host_name="target_logits_host",
++        )
++        runner._resident_phase_profile_hooks.update({
++            "target_logits",
++            "target_logits_host",
++        })
++        if _ROUND_RECORD_FUNCTIONS:
++            runner._resident_round_record_function_ranges.add(
++                "vllm.round_profile.target_logits"
++            )
++    sampler = getattr(runner, "sampler", None)
++    if sampler is not None:
++        _round_profile_class_method(
++            type(sampler),
++            "__call__",
++            "vllm.round_profile.target_sampler",
++            "_qwen38_round_profile_target_sampler",
++            phase_name="target_sampler",
++            host_name="target_sampler_host",
++        )
++        runner._resident_phase_profile_hooks.update({
++            "target_sampler",
++            "target_sampler_host",
++        })
++        if _ROUND_RECORD_FUNCTIONS:
++            runner._resident_round_record_function_ranges.add(
++                "vllm.round_profile.target_sampler"
++            )
++    rejection_sampler = getattr(runner, "rejection_sampler", None)
++    if rejection_sampler is not None:
++        _round_profile_class_method(
++            type(rejection_sampler),
++            "__call__",
++            "vllm.round_profile.target_rejection_sampler",
++            "_qwen38_round_profile_target_rejection_sampler",
++            phase_name="target_rejection_sampler",
++            host_name="target_rejection_sampler_host",
++        )
++        runner._resident_phase_profile_hooks.update({
++            "target_rejection_sampler",
++            "target_rejection_sampler_host",
++        })
++        if _ROUND_RECORD_FUNCTIONS:
++            runner._resident_round_record_function_ranges.add(
++                "vllm.round_profile.target_rejection_sampler"
++            )
++    required_hooks = {
++        "execute_model_round_start",
++        "target_model_forward",
++        "target_model_forward_host",
++        "target_logits",
++        "target_logits_host",
++        "target_rejection_sampler",
++        "target_rejection_sampler_host",
++        "target_sampler",
++        "target_sampler_host",
++        "speculator_propose_host",
++    }
++    speculator = getattr(runner, "speculator", None)
++    if (
++        required_hooks.issubset(runner._resident_phase_profile_hooks)
++        and runner._resident_round_helper_device is not None
++        and speculator is not None
++    ):
++        speculator.resident_phase_timing_control_version = 1
++
++
++def _install_round_profile_hooks(runner, device):
++    runner._resident_phase_profile_hooks = {
++        "execute_model_round_start",
++        "target_model_forward",
++        "target_model_forward_host",
++    }
++    runner._resident_round_record_function_ranges = set()
++    owner = torch.device(device)
++    runner._resident_round_helper_device = (
++        torch.device("cuda:1")
++        if owner.index == 0 and torch.cuda.device_count() > 1
++        else None
++    )
++    if _ROUND_RECORD_FUNCTIONS:
++        _round_profile_class_method(
++            GPUModelRunner,
++            "sample",
++            "vllm.round_profile.sample",
++            "_qwen38_round_profile_sample",
++        )
++        _round_profile_class_method(
++            GPUModelRunner,
++            "sample_tokens",
++            "vllm.round_profile.propose_overall",
++            "_qwen38_round_profile_sample_tokens",
++        )
++        runner._resident_round_record_function_ranges.update({
++            "vllm.round_profile.execute_model",
++            "vllm.round_profile.sample",
++            "vllm.round_profile.propose_overall",
++        })
++    if _ROUND_RECORD_FUNCTIONS:
++        runner._resident_round_record_function_ranges.add(
++            "vllm.round_profile.target_model_call"
++        )
++    graph_marker = "_qwen38_round_profile_run_pw_graph"
++    _round_profile_class_method(
++        ModelCudaGraphManager,
++        "run_pw_graph",
++        "vllm.round_profile.run_pw_graph",
++        graph_marker,
++        phase_name="target_model_forward",
++        host_name="target_model_forward_host",
++        profiler_arg_index=1,
++    )
++    if _ROUND_RECORD_FUNCTIONS:
++        runner._resident_round_record_function_ranges.add(
++            "vllm.round_profile.run_pw_graph"
++        )
++    load_marker = "_qwen38_round_profile_load_model"
++    if not GPUModelRunner.__dict__.get(load_marker, False):
++        original_load = GPUModelRunner.load_model
++        @functools.wraps(original_load)
++        def load_model_profiled(self, *args, **kwargs):
++            result = original_load(self, *args, **kwargs)
++            _attach_target_round_hooks(self)
++            return result
++        GPUModelRunner.load_model = load_model_profiled
++        setattr(GPUModelRunner, load_marker, True)
++    gather_marker = "_qwen38_round_profile_gather_batch_req_state"
++    if not GPUModelRunner.__dict__.get(gather_marker, False):
++        original_gather = GPUModelRunner.gather_batch_req_state
++        @functools.wraps(original_gather)
++        def gather_batch_req_state_profiled(self, *args, **kwargs):
++            result = original_gather(self, *args, **kwargs)
++            profiler = getattr(self, "_resident_phase_profiler", None)
++            sequence = getattr(self, "_resident_round_profile_sequence", None)
++            if profiler is not None and profiler.enabled and sequence is not None:
++                scheduler_output = (
++                    args[0] if args else kwargs.get("scheduler_output")
++                )
++                batch_state = result[0] if type(result) is tuple and result else None
++                profiler.round_phase_update(
++                    sequence, scheduler_output, batch_state
++                )
++            return result
++        GPUModelRunner.gather_batch_req_state = gather_batch_req_state_profiled
++        setattr(GPUModelRunner, gather_marker, True)
++    execute_marker = "_qwen38_round_profile_execute_model"
++    if not GPUModelRunner.__dict__.get(execute_marker, False):
++        original_execute = GPUModelRunner.execute_model
++        @functools.wraps(original_execute)
++        def execute_model_profiled(self, *args, **kwargs):
++            profiler = getattr(self, "_resident_phase_profiler", None)
++            scheduler_output = args[0] if args else kwargs.get("scheduler_output")
++            previous_sequence = getattr(
++                self, "_resident_round_profile_sequence", None
++            )
++            sequence = (
++                profiler.round_begin(scheduler_output)
++                if profiler is not None else None
++            )
++            self._resident_round_profile_sequence = sequence
++            try:
++                if _ROUND_RECORD_FUNCTIONS:
++                    with torch.profiler.record_function(
++                        "vllm.round_profile.execute_model"
++                    ):
++                        return original_execute(self, *args, **kwargs)
++                return original_execute(self, *args, **kwargs)
++            finally:
++                self._resident_round_profile_sequence = previous_sequence
++        GPUModelRunner.execute_model = execute_model_profiled
++        setattr(GPUModelRunner, execute_marker, True)
++
+ class GPUModelRunner(LoRAModelRunnerMixin):
+     def __init__(self, vllm_config: VllmConfig, device: torch.device):
++        if _ROUND_PROFILE:
++            _install_round_profile_hooks(self, device)
+         self.vllm_config = vllm_config
+         self.model_config = vllm_config.model_config
+         self.cache_config = vllm_config.cache_config
+@@ -247,6 +513,19 @@
+         if self.speculative_config is not None:
+             if self.is_last_pp_rank:
+                 self.speculator = init_speculator(self.vllm_config, self.device)
++                if _ROUND_PROFILE:
++                    _round_profile_class_method(
++                        type(self.speculator),
++                        "propose",
++                        "vllm.round_profile.speculator_propose",
++                        "_qwen38_round_profile_speculator_propose",
++                        host_name="speculator_propose_host",
++                    )
++                    self._resident_phase_profile_hooks.add("speculator_propose_host")
++                    if _ROUND_RECORD_FUNCTIONS:
++                        self._resident_round_record_function_ranges.add(
++                            "vllm.round_profile.speculator_propose"
++                        )
+ 
+             if self.speculative_config.method in ("eagle3", "dflash", "dspark"):
+                 # Drafting may require auxiliary hidden states from target model outputs
+@@ -1723,7 +2002,9 @@
+                     )
+                 else:
+                     # Eager (NONE): call the raw model directly.
+-                    model_output = self.model(**model_inputs)
++                    model_output = _round_profile_eager_target_forward(
++                        self, self.model, model_inputs
++                    )
+ 
+         # The model has consumed every PLE output, so the CPU worker may reuse
+         # the registered buffers for the next request.
