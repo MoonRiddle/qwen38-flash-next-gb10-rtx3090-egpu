@@ -28,8 +28,8 @@ checkpoint on a vLLM dev build. Nothing is a hand-rolled benchmark and nothing i
 ## Why this project exists
 
 A single DGX Spark (GB10) is a capable machine, but its decode rate is a fixed ceiling. This project
-exists to show that a **second GPU over eGPU** can break that ceiling enough to matter: it raises decode
-throughput and prefill rate while keeping the same 409,600-token window.
+exists to test whether a **second GPU over eGPU** can lift that ceiling: decode throughput is measured
+higher, and prefill may improve too, though the prefill comparison is still pending.
 
 The point is not that Qwen3.8-Flash-Next is the model to use forever. It is that one DGX Spark plus one
 external GPU has more headroom than the spec sheet suggests, and the recipe transfers to whatever model
