@@ -29,5 +29,5 @@
   <rect x="300" y="156" width="433" height="24" rx="3" fill="#6ea8fe" opacity="0.6"/>
   <text x="725" y="174" font-size="13" text-anchor="end" fill="#111111">2629.04</text>
 
-  <text x="20" y="310" font-size="13" fill="#a0a0a0">Measured with MiaAI-Lab sparkDash at a pinned commit. The single-GB10 arm and its limits are in docs/07.</text>
+  <text x="20" y="310" font-size="13" fill="#a0a0a0">Measured with MiaAI-Lab sparkDash at a pinned commit. Measurement details: docs/07.</text>
 </svg>
