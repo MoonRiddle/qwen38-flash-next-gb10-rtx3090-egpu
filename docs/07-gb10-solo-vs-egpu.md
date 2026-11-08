@@ -94,12 +94,18 @@ contract, same prefill salt scheme.
 
 ### Prefill
 
-| Size | GB10 alone (b12x) | GB10 + 3090 (this recipe) |
+| Size | GB10 alone (cold PLE) | GB10 + 3090 (this recipe) |
 |---:|---:|---:|
-| 4K | pending | 3,133.27 |
-| 16K | pending | 3,064.22 |
-| 32K | pending | 2,443.12 |
-| 200K | pending | 2,035.64 |
+| 4K | 259.19 (4 GiB KV, 32,768 window, MTP off) | 3,133.27 |
+| 16K | 117.87 (1 of 3 samples completed) | 3,064.22 |
+| 32K | not measured (32,768 window) | 2,443.12 |
+| 200K | not measured (32,768 window) | 2,035.64 |
+
+These two columns are not a like-for-like comparison. The GB10-alone arm ran with `PLE_PREWARM=0`, so the
+PLE table is read lazily from USB storage. The engine's own PLE stats show one gather of 53,076 rows taking
+72.4 s for 8.1 MiB, which is why the 16K sample needs about 145 s to first token. The eGPU artifacts record
+`ple_mmap_prewarm: true`, so the GB10-alone numbers measure storage latency, not GPU prefill throughput.
+A fair comparison needs both arms in the same PLE state.
 
 ### Context
 

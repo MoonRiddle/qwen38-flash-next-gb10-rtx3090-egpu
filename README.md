@@ -18,9 +18,10 @@ sits at 67.28. `docs/02-why-prose-is-slower.md` explains the prose bound.
 ![Prefill rate on this recipe](docs/20-prefill.svg)
 
 Every performance number here comes from MiaAI-Lab's [`sparkDash`](https://github.com/MiaAI-Lab/sparkDash)
-collectors at a pinned commit, except the GB10-alone row, which is a registered HTTP/SSE run of the same
-checkpoint on a vLLM dev build. Nothing is a hand-rolled benchmark and nothing is a best-of-N retry. See
-`docs/01-measurement-method.md`.
+collectors at a pinned commit. The exception is the GB10-alone decode row, which is a registered HTTP/SSE
+run of the same checkpoint on a vLLM dev build; the GB10-alone prefill row uses the same sparkDash prefill
+collector as the eGPU row, but with a cold PLE table, so it is not a like-for-like comparison. Nothing is a
+hand-rolled benchmark and nothing is a best-of-N retry. See `docs/01-measurement-method.md`.
 
 > Status: one-machine recipe. The engine is a fork build, not stock vLLM, and the numbers come from one
 > GB10 + RTX 3090 pair. Treat this as a reproducible recipe, not a vendor claim.
@@ -29,7 +30,10 @@ checkpoint on a vLLM dev build. Nothing is a hand-rolled benchmark and nothing i
 
 A single DGX Spark (GB10) is a capable machine, but its decode rate is a fixed ceiling. This project
 exists to test whether a **second GPU over eGPU** can lift that ceiling: decode throughput is measured
-higher, and prefill may improve too, though the prefill comparison is still pending.
+higher, and prefill may improve too, though the prefill comparison is still pending. The GB10-alone
+prefill arm ran with a cold PLE table (`PLE_PREWARM=0`), and one gather of 53,076 rows took 72.4 s,
+so that arm measures USB storage latency rather than the GPU. The eGPU prefill artifacts record
+`ple_mmap_prewarm: true`, so the two are not comparable until both arms use the same PLE state.
 
 The point is not that Qwen3.8-Flash-Next is the model to use forever. It is that one DGX Spark plus one
 external GPU has more headroom than the spec sheet suggests, and the recipe transfers to whatever model
