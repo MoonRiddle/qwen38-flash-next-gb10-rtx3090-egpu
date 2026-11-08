@@ -1,43 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" width="1000" height="420" font-family="sans-serif" font-size="14">
-  <title>Prefill rate on this recipe and a cold-PLE GB10 run</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" width="1000" height="340" font-family="sans-serif" font-size="14">
+  <title>Prefill rate on this recipe</title>
 
-  <rect x="0" y="0" width="1000" height="420" fill="#111111"/>
+  <rect x="0" y="0" width="1000" height="340" fill="#111111"/>
 
   <text x="20" y="30" font-size="14" fill="#e6e6e6">Prefill rate, tokens per second</text>
-  <text x="20" y="50" font-size="13" fill="#a0a0a0">GB10 alone: 8 GiB KV, 32,768 window. GB10 + RTX 3090: KV 14 GiB.</text>
+  <text x="20" y="50" font-size="13" fill="#a0a0a0">GB10 + RTX 3090, KV 14 GiB, one prefill job per size.</text>
 
-  <line x1="300" y1="70" x2="300" y2="330" stroke="#555555" stroke-width="1"/>
-  <line x1="300" y1="330" x2="960" y2="330" stroke="#555555" stroke-width="1"/>
-  <line x1="465" y1="70" x2="465" y2="330" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="630" y1="70" x2="630" y2="330" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="795" y1="70" x2="795" y2="330" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
-  <text x="300" y="350" font-size="12" text-anchor="middle" fill="#a0a0a0">0</text>
-  <text x="465" y="350" font-size="12" text-anchor="middle" fill="#a0a0a0">1000</text>
-  <text x="630" y="350" font-size="12" text-anchor="middle" fill="#a0a0a0">2000</text>
-  <text x="795" y="350" font-size="12" text-anchor="middle" fill="#a0a0a0">3000</text>
-  <text x="960" y="350" font-size="12" text-anchor="middle" fill="#a0a0a0">4000</text>
+  <line x1="300" y1="70" x2="300" y2="250" stroke="#555555" stroke-width="1"/>
+  <line x1="300" y1="250" x2="960" y2="250" stroke="#555555" stroke-width="1"/>
+  <line x1="465" y1="70" x2="465" y2="250" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="630" y1="70" x2="630" y2="250" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="795" y1="70" x2="795" y2="250" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="300" y="270" font-size="12" text-anchor="middle" fill="#a0a0a0">0</text>
+  <text x="465" y="270" font-size="12" text-anchor="middle" fill="#a0a0a0">1000</text>
+  <text x="630" y="270" font-size="12" text-anchor="middle" fill="#a0a0a0">2000</text>
+  <text x="795" y="270" font-size="12" text-anchor="middle" fill="#a0a0a0">3000</text>
+  <text x="960" y="270" font-size="12" text-anchor="middle" fill="#a0a0a0">4000</text>
 
   <text x="290" y="96" font-size="13" text-anchor="end" fill="#e6e6e6">4K</text>
-  <rect x="300" y="84" width="464" height="18" rx="3" fill="#6ea8fe"/>
-  <text x="756" y="97" font-size="12" text-anchor="end" fill="#111111">2813.41 eGPU</text>
-  <rect x="300" y="106" width="43" height="18" rx="3" fill="#f0a060"/>
-  <text x="349" y="119" font-size="12" fill="#e6e6e6">259.19</text>
+  <rect x="300" y="84" width="464" height="24" rx="3" fill="#6ea8fe"/>
+  <text x="756" y="102" font-size="13" text-anchor="end" fill="#111111">2813.41</text>
 
-  <text x="290" y="152" font-size="13" text-anchor="end" fill="#e6e6e6">16K</text>
-  <rect x="300" y="140" width="445" height="18" rx="3" fill="#6ea8fe" opacity="0.85"/>
-  <text x="737" y="153" font-size="12" text-anchor="end" fill="#111111">2699.81 eGPU</text>
-  <rect x="300" y="162" width="19" height="18" rx="3" fill="#f0a060"/>
-  <text x="325" y="175" font-size="12" fill="#e6e6e6">117.87</text>
+  <text x="290" y="132" font-size="13" text-anchor="end" fill="#e6e6e6">16K</text>
+  <rect x="300" y="120" width="445" height="24" rx="3" fill="#6ea8fe" opacity="0.8"/>
+  <text x="737" y="138" font-size="13" text-anchor="end" fill="#111111">2699.81</text>
 
-  <text x="290" y="208" font-size="13" text-anchor="end" fill="#e6e6e6">32K</text>
-  <rect x="300" y="196" width="433" height="18" rx="3" fill="#6ea8fe" opacity="0.7"/>
-  <text x="725" y="209" font-size="12" text-anchor="end" fill="#111111">2629.04 eGPU</text>
-  <text x="310" y="231" font-size="12" fill="#a0a0a0">not measured: 32,768 window</text>
+  <text x="290" y="168" font-size="13" text-anchor="end" fill="#e6e6e6">32K</text>
+  <rect x="300" y="156" width="433" height="24" rx="3" fill="#6ea8fe" opacity="0.6"/>
+  <text x="725" y="174" font-size="13" text-anchor="end" fill="#111111">2629.04</text>
 
-  <rect x="300" y="256" width="12" height="12" fill="#6ea8fe"/>
-  <text x="320" y="267" font-size="12" fill="#a0a0a0">GB10 + RTX 3090</text>
-  <rect x="540" y="256" width="12" height="12" fill="#f0a060"/>
-  <text x="560" y="267" font-size="12" fill="#a0a0a0">GB10 alone</text>
-
-  <text x="20" y="390" font-size="12" fill="#a0a0a0">GB10 alone is measured at 32,768 tokens; the two series use different PLE settings. Details in docs/07.</text>
+  <text x="20" y="310" font-size="13" fill="#a0a0a0">Measured with MiaAI-Lab sparkDash at a pinned commit. The single-GB10 arm and its limits are in docs/07.</text>
 </svg>
