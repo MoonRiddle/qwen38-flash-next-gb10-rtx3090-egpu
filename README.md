@@ -139,9 +139,9 @@ Prefill on the 14 GiB engine:
 
 | Size | tok/s |
 |---|---:|
-| 4K | 2,814.48 |
-| 16K | 2,698.71 |
-| 32K | 2,621.51 |
+| 4K | 2,813.41 |
+| 16K | 2,699.81 |
+| 32K | 2,629.04 |
 
 A non-streaming long-prompt probe with two concurrent streams completed at 4K, 16K, 32K and
 315,000 (326,260 prompt tokens per stream on the last run). Simultaneous residency is not
@@ -270,7 +270,7 @@ rows were measured at KV 15 GiB (`677,901 tokens, 1.99x`), and the 14 GiB admiss
 
 | Prefill (340,000 engine) | 4K | 16K | 32K |
 |---|---:|---:|---:|
-| tok/s | 2,814.48 | 2,698.71 | 2,621.51 |
+| tok/s | 2,813.41 | 2,699.81 | 2,629.04 |
 
 Short-prompt concurrency (`sep-g`, the runner's fixed 67-token prompt plus 400 forced output
 tokens), three repetitions, medians:

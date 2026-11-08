@@ -4,7 +4,7 @@
   <rect x="0" y="0" width="1000" height="420" fill="#111111"/>
 
   <text x="20" y="30" font-size="14" fill="#e6e6e6">Prefill rate, tokens per second</text>
-  <text x="20" y="50" font-size="13" fill="#a0a0a0">GB10 alone is 4 GiB KV, 32,768 window, MTP off, cold PLE. The eGPU row is KV 14 GiB with a warm PLE.</text>
+  <text x="20" y="50" font-size="13" fill="#a0a0a0">GB10 alone is 8 GiB KV, 32,768 window, MTP off, cold PLE. The eGPU row is KV 14 GiB with a warm PLE.</text>
 
   <line x1="300" y1="70" x2="300" y2="330" stroke="#555555" stroke-width="1"/>
   <line x1="300" y1="330" x2="960" y2="330" stroke="#555555" stroke-width="1"/>
@@ -19,19 +19,19 @@
 
   <text x="290" y="96" font-size="13" text-anchor="end" fill="#e6e6e6">4K</text>
   <rect x="300" y="84" width="464" height="18" rx="3" fill="#6ea8fe"/>
-  <text x="756" y="97" font-size="12" text-anchor="end" fill="#111111">2814.48 eGPU</text>
+  <text x="756" y="97" font-size="12" text-anchor="end" fill="#111111">2813.41 eGPU</text>
   <rect x="300" y="106" width="43" height="18" rx="3" fill="#f0a060"/>
   <text x="349" y="119" font-size="12" fill="#e6e6e6">259.19</text>
 
   <text x="290" y="152" font-size="13" text-anchor="end" fill="#e6e6e6">16K</text>
   <rect x="300" y="140" width="445" height="18" rx="3" fill="#6ea8fe" opacity="0.85"/>
-  <text x="737" y="153" font-size="12" text-anchor="end" fill="#111111">2698.71 eGPU</text>
+  <text x="737" y="153" font-size="12" text-anchor="end" fill="#111111">2699.81 eGPU</text>
   <rect x="300" y="162" width="19" height="18" rx="3" fill="#f0a060"/>
   <text x="325" y="175" font-size="12" fill="#e6e6e6">117.87</text>
 
   <text x="290" y="208" font-size="13" text-anchor="end" fill="#e6e6e6">32K</text>
   <rect x="300" y="196" width="433" height="18" rx="3" fill="#6ea8fe" opacity="0.7"/>
-  <text x="725" y="209" font-size="12" text-anchor="end" fill="#111111">2621.51 eGPU</text>
+  <text x="725" y="209" font-size="12" text-anchor="end" fill="#111111">2629.04 eGPU</text>
   <text x="310" y="231" font-size="12" fill="#a0a0a0">not measured: 32,768 window</text>
 
   <rect x="300" y="256" width="12" height="12" fill="#6ea8fe"/>
