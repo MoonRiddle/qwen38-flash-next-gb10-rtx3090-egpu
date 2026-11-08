@@ -6,8 +6,8 @@
 
   <text x="20" y="28" font-size="14" fill="#e6e6e6">Qwen3.8-Flash-Next INT4 on GB10 and RTX 3090</text>
   <text x="20" y="46" font-size="14" fill="#e6e6e6">What runs where, and why the numbers move</text>
-  <text x="20" y="64" font-size="13" fill="#a0a0a0">PCIe Gen4 x4, non-P2P: transfers cross host memory, so the body stays on the GB10</text>
-  <text x="20" y="68" font-size="13" fill="#a0a0a0">and only the per-step working set sits on the 3090.</text>
+  <text x="20" y="60" font-size="13" fill="#a0a0a0">PCIe Gen4 x4, non-P2P: transfers cross host memory, so the body stays on the GB10</text>
+  <text x="20" y="74" font-size="13" fill="#a0a0a0">and only the per-step working set sits on the 3090.</text>
 
   <text x="20" y="92" font-size="14" fill="#e6e6e6">A. 409600 window, one request</text>
 
@@ -60,7 +60,7 @@
 
   <rect x="34" y="598" width="412" height="56" rx="6" fill="#1c1c1c" stroke="#e0b36e" stroke-width="1.2"/>
   <text x="46" y="619" fill="#e6e6e6">Two request streams · max-num-seqs 2</text>
-  <text x="46" y="639" font-size="13" fill="#a0a0a0">each slot up to 315,864 tokens</text>
+  <text x="46" y="639" font-size="13" fill="#a0a0a0">even-split arithmetic 315,864 per slot, not verified</text>
 
   <rect x="560" y="430" width="420" height="260" rx="10" fill="#111111" stroke="#555555" stroke-width="1.5"/>
   <text x="574" y="454" fill="#e6e6e6">RTX 3090 · 24 GiB · device 0</text>
@@ -68,7 +68,7 @@
   <rect x="574" y="466" width="392" height="76" rx="6" fill="#1c1c1c" stroke="#d98bd6" stroke-width="1.2"/>
   <text x="586" y="487" fill="#e6e6e6">KV cache · fp8_e5m2 · 14 GiB</text>
   <text x="586" y="507" font-size="13" fill="#a0a0a0">631,728 tokens admitted · 1.86x</text>
-  <text x="586" y="527" font-size="13" fill="#a0a0a0">two slots · 315,864 tokens each</text>
+  <text x="586" y="527" font-size="13" fill="#a0a0a0">two slots · even split 315,864 (arithmetic only)</text>
 
   <rect x="574" y="556" width="392" height="40" rx="6" fill="#1c1c1c" stroke="#e08a8a" stroke-width="1.2"/>
   <text x="586" y="581" font-size="13" fill="#e6e6e6">Draft MTP head · same int4</text>
@@ -82,7 +82,7 @@
   <text x="510" y="544" font-size="12" text-anchor="middle" fill="#a0a0a0">host hop</text>
 
   <rect x="20" y="702" width="960" height="52" rx="8" fill="#161616" stroke="#444444" stroke-width="1.2"/>
-  <text x="34" y="724" font-size="13" fill="#a0a0a0">340,000 window · C=2 medians: code 86.79 per request · 163.46 aggregate</text>
+  <text x="34" y="724" font-size="13" fill="#a0a0a0">340,000 window · C=2 medians at KV 15 GiB: code 86.79 per request · 163.46 aggregate</text>
   <text x="34" y="742" font-size="13" fill="#a0a0a0">prose 40.16 per request · 78.35 aggregate · short prompts C=2 260.81 / 86.60, C=4 302.98 / 115.28</text>
 
   <text x="20" y="784" font-size="14" fill="#e6e6e6">C. Why the numbers move - one decode step</text>
@@ -111,7 +111,7 @@
   <text x="20" y="1108" font-size="13" fill="#e6e6e6">Measured results, short prompt (400 forced tokens). These are separate from the four steps above.</text>
 
   <rect x="20" y="1120" width="960" height="52" rx="8" fill="#161616" stroke="#444444" stroke-width="1.2"/>
-  <text x="34" y="1144" font-size="13" fill="#e6e6e6">code 185.89 @ 409,600 · 114.11 @ 340,000 · C=2 86.79 per request, 163.46 aggregate</text>
+  <text x="34" y="1144" font-size="13" fill="#e6e6e6">code 185.89 @ 409,600 · 114.11 @ 340,000 · C=2 86.79 per request, 163.46 aggregate (KV 15 GiB)</text>
   <text x="34" y="1162" font-size="13" fill="#a0a0a0">prose 67.28 @ 409,600 · 45.85 @ 340,000 · C=2 40.16 per request, 78.35 aggregate</text>
 
   <text x="20" y="1200" font-size="13" fill="#a0a0a0">Prefill on the same placement: 4K 2,814.48 · 16K 2,698.71 · 32K 2,621.51 tok/s.</text>
