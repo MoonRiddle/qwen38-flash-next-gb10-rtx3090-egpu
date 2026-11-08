@@ -49,7 +49,7 @@ Growth is a step rather than a slope: unified memory went from 11,472 MiB to 80,
 51 GiB PLE table is the largest reclaimable object, so it fills page cache during load and the kernel cannot
 reclaim it fast enough.
 
-Consequence for this document: the GB10-alone rows below use 4 GiB KV at a 16,384-token window, with a guard
+Consequence for this document: the GB10-alone decode rows below use 4 GiB KV at a 16,384-token window, and the prefill arm uses 8 GiB KV at 32,768, with a guard
 that stops the container if unified-memory use reaches 85%. The 20 GiB figure from the author is not
 reproducible on this machine without taking the host down.
 
@@ -96,7 +96,7 @@ contract, same prefill salt scheme.
 
 | Size | GB10 alone (cold PLE) | GB10 + 3090 (this recipe) |
 |---:|---:|---:|
-| 4K | 259.19 (4 GiB KV, 32,768 window, MTP off) | 3,133.27 |
+| 4K | 259.19 (8 GiB KV, 32,768 window, MTP off) | 3,133.27 |
 | 16K | 117.87 (1 of 3 samples completed) | 3,064.22 |
 | 32K | not measured (32,768 window) | 2,443.12 |
 | 200K | not measured (32,768 window) | 2,035.64 |
