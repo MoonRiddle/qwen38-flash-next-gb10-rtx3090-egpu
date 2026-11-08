@@ -109,21 +109,22 @@ A fair comparison needs both arms in the same PLE state.
 
 The author recipe on a single GB10 could not be brought up inside this memory guard. Model weights are
 62.8 GB and the PLE table is 49 GB, so the two alone reach about 92% of the 121 GB before any KV cache.
+The author's own defaults are `kv_cache_bytes: 20g` at `max_model_len: 262144`; the rows below are
+deliberately reduced settings, not the author default.
 
 | Attempt | KV | Window | Graph mode | Result |
 |---|---:|---:|---|---|
-| author default | 8g | 32,768 | graphs on | guard stop at 85% |
-| NVMe PLE table | 8g | 32,768 | graphs on | 83% to 91% in 3 s, guard stop |
+| reduced | 8g | 32,768 | graphs on | guard stop at 85% |
+| reduced, NVMe PLE table | 8g | 32,768 | graphs on | 83% to 91% in 3 s, guard stop |
 | reduced | 4g | 16,384 | graphs on | guard stop at 81% during load |
 | reduced | 4g | 16,384 | `--enforce-eager` | 74% to 84% in 4 s |
-| minimum KV | 1g | 8,192 | `--enforce-eager` | 73% to 84% in 4 s |
+| reduced | 1g | 8,192 | `--enforce-eager` | 73% to 84% in 4 s |
 
 Cutting KV by four did not change the size of the jump, and disabling CUDA graphs did not change it
-either, so the growth is not KV allocation and not graph capture. The remaining candidate is the PLE
-table being faulted in after load. That is a strong inference from the arithmetic, not a logged fact:
-the engine log does not separate PLE faults from other allocations. Why one gather of 53,076 rows took
-72.4 s is also unresolved; a sequential 49 GB copy finished in 57 s, which does not rule out a random
-read pattern.
+either, so KV allocation and graph capture are unlikely to be the main cause. That is an inference from
+these five samples, not a logged fact. The cause of the growth is unresolved: the engine log does not
+separate PLE faults from other allocations, and why one gather of 53,076 rows took 72.4 s is also
+unresolved. A sequential 49 GB copy finished in 57 s, which does not rule out a random read pattern.
 
 ### Context
 
