@@ -4,7 +4,7 @@
   <rect x="0" y="0" width="1000" height="420" fill="#111111"/>
 
   <text x="20" y="30" font-size="14" fill="#e6e6e6">Prefill rate, tokens per second</text>
-  <text x="20" y="50" font-size="13" fill="#a0a0a0">GB10 alone is 8 GiB KV, 32,768 window, MTP off, cold PLE. The eGPU row is KV 14 GiB with a warm PLE.</text>
+  <text x="20" y="50" font-size="13" fill="#a0a0a0">GB10 alone: 8 GiB KV, 32,768 window. GB10 + RTX 3090: KV 14 GiB.</text>
 
   <line x1="300" y1="70" x2="300" y2="330" stroke="#555555" stroke-width="1"/>
   <line x1="300" y1="330" x2="960" y2="330" stroke="#555555" stroke-width="1"/>
@@ -35,9 +35,9 @@
   <text x="310" y="231" font-size="12" fill="#a0a0a0">not measured: 32,768 window</text>
 
   <rect x="300" y="256" width="12" height="12" fill="#6ea8fe"/>
-  <text x="320" y="267" font-size="12" fill="#a0a0a0">GB10 + RTX 3090, warm PLE</text>
+  <text x="320" y="267" font-size="12" fill="#a0a0a0">GB10 + RTX 3090</text>
   <rect x="540" y="256" width="12" height="12" fill="#f0a060"/>
-  <text x="560" y="267" font-size="12" fill="#a0a0a0">GB10 alone, cold PLE</text>
+  <text x="560" y="267" font-size="12" fill="#a0a0a0">GB10 alone</text>
 
-  <text x="20" y="390" font-size="12" fill="#a0a0a0">The two series are not comparable: the GB10 arm reads the PLE table lazily and one gather of 53,076 rows took 72.4 s.</text>
+  <text x="20" y="390" font-size="12" fill="#a0a0a0">GB10 alone is measured at 32,768 tokens; the two series use different PLE settings. Details in docs/07.</text>
 </svg>
